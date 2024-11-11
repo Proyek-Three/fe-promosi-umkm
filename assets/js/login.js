@@ -34,7 +34,7 @@ function getLogin() {
     }
     if (loginSuccess) {
         alert("Selamat datang di Admin Jul Gadget!");
-        window.location.href = "dashboard.html";
+        window.location.href = "/admin/dashboard.html";
     } else {
         console.log("Incorrect email or password");
         alert("Email atau password salah");
