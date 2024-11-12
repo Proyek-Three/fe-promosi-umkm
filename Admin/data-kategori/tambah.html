@@ -10,12 +10,12 @@
     />
     <link rel="stylesheet" href="../../assets/css/tailwind.output.css" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
@@ -60,13 +60,9 @@
             </li>
 
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="index.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="../data-users/index.html"
               >
                 <i class="fa-solid fa-users"></i>
                 <span class="ml-4">Data Users</span>
@@ -74,15 +70,20 @@
             </li>
 
             <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="../data-kategori/index.html"
-              >
-                <i class="fa-solid fa-list"></i>
-                <span class="ml-4">Data Kategori</span>
-              </a>
-            </li>
+                <span
+                  class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                  aria-hidden="true"
+                ></span>
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                  href="index.html"
+                >
+                  <i class="fa-solid fa-list"></i>
+                  <span class="ml-4">Data Kategori</span>
+                </a>
+              </li>
           </ul>
+         
         </div>
       </aside>
       <!-- Mobile sidebar -->
@@ -114,7 +115,7 @@
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            Dashboard
+            Admin
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -122,38 +123,39 @@
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="../dashboard.html"
               >
-                <i class="fa-solid fa-house"></i>
+              <i class="fa-solid fa-house"></i>
                 <span class="ml-4">Dashboard</span>
               </a>
             </li>
 
+            
             <li class="relative px-6 py-3">
-              <span
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="../data-users/index.html"
+                >
+                  <i class="fa-solid fa-users"></i>
+                  <span class="ml-4">Data Users</span>
+                </a>
+              </li>
+  
+              <li class="relative px-6 py-3">
+                <span
                 class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
               ></span>
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="../data-users/index.html"
-              >
-                <i class="fa-solid fa-users"></i>
-                <span class="ml-4">Data Users</span>
-              </a>
-            </li>
-
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="../data-kategori/index.html"
-              >
-                <i class="fa-solid fa-list"></i>
-                <span class="ml-4">Data Kategori</span>
-              </a>
-            </li>
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                  href="index.html"
+                >
+                  <i class="fa-solid fa-list"></i>
+                  <span class="ml-4">Data Kategori</span>
+                </a>
+              </li>
           </ul>
+          
         </div>
       </aside>
-
       <div class="flex flex-col flex-1 w-full">
         <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
           <div
@@ -412,70 +414,37 @@
           </div>
         </header>
 
-        <!-- CONTENT -->
-        <main class="h-full overflow-y-auto">
-          <div class="container px-6 mx-auto grid">
-            <h2
-              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-            >
-              Tambah Users
-            </h2>
-
-            <div>
-              <button
-                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+         <!-- CONTENT -->
+         <main class="h-full overflow-y-auto">
+            <div class="container px-6 mx-auto grid">
+              <h2
+                class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
               >
-                Submit
-              </button>
+                Tambah Kategori
+              </h2>
+  
+              
+              
+              <label class="block text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">Nama Kategori</span>
+                  <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Nama kategori"
+                  />
+                  
+                </label>
+
+                <div>
+                  <button
+                    class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  >
+                    Submit
+                  </button>
+                </div>
+             
             </div>
-            <br />
-            
-            <label class="block text-sm">
-              <span class="text-gray-700 dark:text-gray-400"> Role </span>
-              <select
-                class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-              >
-                <option disabled selected>Pilih Role</option>
-                <option>Admin</option>
-                <option>Seller</option>
-              </select>
-            </label>
-
-            <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Nama User</span>
-              <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="Nama User"
-              />
-
-            </label>
-            <label class="block mt-4 text-sm">
-              <span class="text-gray-700 dark:text-gray-400">Username</span>
-              <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="Username"
-              />
-            </label>
-            <label class="block mt-4 text-sm">
-              <span class="text-gray-700 dark:text-gray-400">Password</span>
-              <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="Password"
-              />
-            </label>
-
-            <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Alamat</span>
-                <textarea
-                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  rows="3"
-                  placeholder="Alamat"
-                ></textarea>
-              </label>
-              <br>
-          </div>
-        </main>
-        <!-- CONTENT END  -->
+          </main>
+          <!-- CONTENT END  -->
       </div>
     </div>
   </body>
