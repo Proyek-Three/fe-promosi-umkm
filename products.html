@@ -99,6 +99,40 @@
     />
     <link rel="stylesheet" href="assets/css/category.css" />
   </head>
+  <style>
+    .filter-category {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      transition: transform 0.3s, color 0.3s;
+    }
+  
+    .filter-category:hover {
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+  
+    .filter-category.active {
+      color: #ffd700;
+      text-decoration: underline;
+    }
+  
+    .product-item {
+      display: none; /* Initially hidden */
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+  
+    .product-item.show {
+      display: block; /* Show only filtered products */
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
   <body>
     <header class="fixed w-full z-50">
 
@@ -267,108 +301,57 @@
 
     <!-- CONTENT -->
     <div class="bg-purple-900 py-16">
-      <div class="container mx-auto px-4">
-        <div class="mydict">
-          <div>
-            <label>
-              <input type="radio" name="radio" checked="" />
-              <span>Food</span>
-            </label>
-            <label>
-              <input type="radio" name="radio" />
-              <span>Shirt</span>
-            </label>
-            <label>
-              <input type="radio" name="radio" />
-              <span>Shoes</span>
-            </label>
+        <div class="container mx-auto px-4">
+          <div class="mydict text-center mb-8">
+            <span class="filter-category active" data-category="all" onclick="filterProducts(this)">All</span>
+            <span class="filter-category" data-category="food" onclick="filterProducts(this)">Food</span>
+            <span class="filter-category" data-category="shirt" onclick="filterProducts(this)">Shirt</span>
+            <span class="filter-category" data-category="shoes" onclick="filterProducts(this)">Shoes</span>
           </div>
-        </div>
-        <h2 class="text-3xl font-bold text-white mb-8">
-          Introducing Our Latest Product
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white rounded-lg shadow-lg p-8">
-            <div class="relative">
+          <h2 class="text-3xl font-bold text-white mb-8">
+            Introducing Our Latest Product
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="product-container">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-lg shadow-lg p-8 product-item" data-category="food">
               <img
-                class="object-cover w-full h-full"
+                class="object-cover w-full h-48 rounded-t-lg"
                 src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                alt="Product"
+                alt="Food Product"
               />
-              <div class="absolute inset-0 bg-black opacity-40"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <button
-                  class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300"
-                >
-                  View Product
-                </button>
-              </div>
+              <h3 class="text-xl font-bold text-gray-900 mt-4">Food Product</h3>
+              <p class="text-gray-500 text-sm mt-2">
+                A delicious food product.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-            <p class="text-gray-500 text-sm mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-              ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            </p>
-            <div class="flex items-center justify-between mt-4">
-              <span class="text-gray-900 font-bold text-lg">Rp. 50.000</span>
-              <!-- <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button> -->
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow-lg p-8">
-            <div class="relative overflow-hidden">
+            <!-- Product 2 -->
+            <div class="bg-white rounded-lg shadow-lg p-8 product-item" data-category="shirt">
               <img
-                class="object-cover w-full h-full"
+                class="object-cover w-full h-48 rounded-t-lg"
                 src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                alt="Product"
+                alt="Shirt Product"
               />
-              <div class="absolute inset-0 bg-black opacity-40"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <button
-                  class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300"
-                >
-                  View Product
-                </button>
-              </div>
+              <h3 class="text-xl font-bold text-gray-900 mt-4">Shirt Product</h3>
+              <p class="text-gray-500 text-sm mt-2">
+                A stylish shirt.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-            <p class="text-gray-500 text-sm mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-              ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            </p>
-            <div class="flex items-center justify-between mt-4">
-              <span class="text-gray-900 font-bold text-lg">Rp. 150.000</span>
-              <!-- <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button> -->
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow-lg p-8">
-            <div class="relative overflow-hidden">
+            <!-- Product 3 -->
+            <div class="bg-white rounded-lg shadow-lg p-8 product-item" data-category="shoes">
               <img
-                class="object-cover w-full h-full"
+                class="object-cover w-full h-48 rounded-t-lg"
                 src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                alt="Product"
+                alt="Shoes Product"
               />
-              <div class="absolute inset-0 bg-black opacity-40"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <button
-                  class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300"
-                >
-                  View Product
-                </button>
-              </div>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-            <p class="text-gray-500 text-sm mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-              ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            </p>
-            <div class="flex items-center justify-between mt-4">
-              <span class="text-gray-900 font-bold text-lg">Rp. 75.000</span>
-              <!-- <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button> -->
+              <h3 class="text-xl font-bold text-gray-900 mt-4">Shoes Product</h3>
+              <p class="text-gray-500 text-sm mt-2">
+                A pair of shoes.
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      
     <!-- CONTENT END -->
 
     <!-- FOOTER  -->
@@ -476,5 +459,36 @@
     <!-- FOOTER END  -->
 
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+    <script>
+        function filterProducts(selectedCategory) {
+          // Remove 'active' class from all filter buttons
+          document.querySelectorAll('.filter-category').forEach((el) => {
+            el.classList.remove('active');
+          });
+      
+          // Add 'active' class to the clicked filter button
+          selectedCategory.classList.add('active');
+      
+          // Get the selected category
+          const category = selectedCategory.getAttribute('data-category');
+          const products = document.querySelectorAll('.product-item');
+      
+          // Filter products
+          products.forEach((product) => {
+            const productCategory = product.getAttribute('data-category');
+      
+            if (category === 'all' || productCategory === category) {
+              product.classList.add('show'); // Show matched products
+            } else {
+              product.classList.remove('show'); // Hide unmatched products
+            }
+          });
+        }
+      
+        // Initialize with "All" filter
+        document.addEventListener('DOMContentLoaded', () => {
+          filterProducts(document.querySelector('.filter-category.active'));
+        });
+      </script>
   </body>
 </html>
