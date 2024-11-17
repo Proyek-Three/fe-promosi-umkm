@@ -1,72 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="bg-light py-3 py-md-5">
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-12 col-md-11 col-lg-8 col-xl-7 col-xxl-6">
-                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-center mb-5">
-                                    <a href="#!">
-                                        <img src="/assets/img/umkm.webp" alt="BootstrapBrain Logo" width="50" height="50">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <form action="#" onsubmit="getLogin(); return false;">
-                            <div class="row gy-3 gy-md-4 overflow-hidden">
-                                <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                                            </svg>
-                                        </span>
-                                        <input type="email" class="form-control" name="email" id="email" required>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
-                                                <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
-                                                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                            </svg>
-                                        </span>
-                                        <input type="password" class="form-control" name="password" id="password" value="" required>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg" type="submit">Log In</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="row">
-                            <div class="col-12">
-                                <hr class="mt-5 mb-4 border-secondary-subtle">
-                                <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center">
-                                    <a href="#!" class="link-secondary text-decoration-none"></a>
-                                    <a href="#!" class="link-secondary text-decoration-none"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="font-[sans-serif] bg-white md:h-screen">
+      <div class="grid md:grid-cols-2 items-center gap-8 h-full">
+        <div class="flex items-center p-6 h-full w-full">
+          <form
+            action="#"
+            onsubmit="getLogin(); return false;"
+            class="max-w-lg w-full mx-auto"
+          >
+            <div class="mb-12">
+              <h3
+                class="text-blue-500 md:text-3xl text-2xl font-extrabold max-md:text-center"
+              >
+                Login
+              </h3>
             </div>
+
+            <div class="mt-6">
+              <label class="text-gray-800 text-xs block mb-2" for="email"
+                >Email</label
+              >
+              <div class="relative flex items-center">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                  name="email"
+                  id="email"
+                  type="email"
+                  required
+                  class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
+                  placeholder="Enter email"
+                  requared
+                />
+              </div>
+            </div>
+            <div class="mt-6">
+              <label class="text-gray-800 text-xs block mb-2" for="password"
+                >Password</label
+              >
+              <div class="relative flex items-center">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  name="password"
+                  type="password"
+                  id="password"
+                  value=""
+                  required
+                  class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
+                  placeholder="Enter password"
+                />
+              </div>
+            </div>
+            <div class="flex items-center mt-6">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                class="h-4 w-4 shrink-0 rounded"
+              />
+              <label for="remember-me" class="ml-3 block text-sm text-gray-800">
+                I accept the
+                <a
+                  href="javascript:void(0);"
+                  class="text-blue-500 font-semibold hover:underline ml-1"
+                  >Terms and Conditions</a
+                >
+              </label>
+            </div>
+
+            <div class="mt-12">
+              <button
+                type="submit"
+                class="w-full py-3 px-6 text-sm tracking-wider font-semibold rounded-md bg-blue-600 hover:bg-blue-700 text-white focus:outline-none"
+              >
+                Submit
+              </button>
+              <p class="text-sm mt-6 text-gray-800">
+                Don't have an account?
+                <a
+                  href="register.html"
+                  class="text-blue-500 font-semibold hover:underline ml-1"
+                  >Register here</a
+                >
+              </p>
+            </div>
+          </form>
         </div>
+
+        <div class="max-md:order-1 p-4 bg-gray-50 h-full">
+          <img
+            src="https://readymadeui.com/signin-image.webp"
+            class="lg:max-w-[90%] w-full h-full object-contain block mx-auto"
+            alt="login-image"
+          />
+        </div>
+      </div>
     </div>
+
+
     <script src="/assets/js/login.js"></script>
-</body>
+  </body>
 </html>

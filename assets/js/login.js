@@ -33,7 +33,7 @@ function getLogin() {
         }
     }
     if (loginSuccess) {
-        alert("Selamat datang di Admin Jul Gadget!");
+        alert("Selamat datang di Dashboard Admin Go-UMKM!");
         window.location.href = "/admin/dashboard.html";
     } else {
         console.log("Incorrect email or password");
