@@ -1,0 +1,32 @@
+.filter-category {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  .filter-category:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+  }
+
+  .filter-category.active {
+    color: #ffd700;
+    text-decoration: underline;
+  }
+
+  .product-item {
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .product-item.show {
+    display: block; /* Show only filtered products */
+    opacity: 1;
+    transform: scale(1);
+  }
