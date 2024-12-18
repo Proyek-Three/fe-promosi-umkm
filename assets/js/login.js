@@ -1,42 +1,46 @@
-var admin = [
-    {
-        id: "1",
-        name: "ghaida",
-        email: "ghaida123@gmail.com",
-        password: "umkm123"
-    },
+document.getElementById("loginButton").addEventListener("click", async function () {
+    const form = document.getElementById("loginForm");
+    const formData = new FormData(form);
 
-    {
-        id: "2",
-        name: "Dzulkifli",
-        email: "dzulkiflifaiz11@gmail.com",
-        password: "ganteng"
-    }
-];
+    // Ambil data dari form
+    const data = {
+        username: formData.get("username"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+    };
 
-function getLogin() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    try {
+        // Tentukan URL backend secara dinamis
+        const isLocalhost = window.location.origin === "http://127.0.0.1:8080";
+        const BACKEND_URL = isLocalhost
+            ? "http://127.0.0.1:8080/login" // URL untuk backend lokal
+            : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/login"; // URL untuk backend Heroku
 
-    if (!email || !password) {
-        console.log("There's still blank form.");
-        alert("Harap isi semua bidang!");
-        return;
-    }
+        // Kirim data ke server
+        const response = await fetch(BACKEND_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
 
-    var loginSuccess = false;
-    for (var i = 0; i < admin.length; i++) {
-        if (email === admin[i].email && password === admin[i].password) {
-            console.log("Admin login berhasil.");
-            loginSuccess = true;
-            break;
+        if (response.ok) {
+            // Ambil respon dari server
+            const result = await response.json();
+            alert(result.message); // Tampilkan pesan sukses
+
+            // Simpan token di localStorage untuk autentikasi
+            localStorage.setItem("token", result.token);
+
+            // Redirect ke halaman utama/dashboard
+            window.location.href = "dashboard.html";
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.message}`);
         }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred during login.");
     }
-    if (loginSuccess) {
-        alert("Selamat datang di Dashboard Admin Go-UMKM!");
-        window.location.href = "/admin/dashboard.html";
-    } else {
-        console.log("Incorrect email or password");
-        alert("Email atau password salah");
-    }
-}
+});
