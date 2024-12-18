@@ -14,7 +14,7 @@ document.getElementById("registerButton").addEventListener("click", async functi
       const isLocalhost = window.location.origin === "http://127.0.0.1:8080";
       const BACKEND_URL = isLocalhost
         ? "http://127.0.0.1:8080/register" // URL untuk backend lokal
-        : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/register"; // URL untuk backend Heroku
+        : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/register"; // URL untuk backend Heroku
   
       const response = await fetch(BACKEND_URL, {
         method: "POST",
