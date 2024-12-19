@@ -9,6 +9,9 @@ document.getElementById("registerButton").addEventListener("click", async functi
       password: formData.get("password"),
     };
   
+    console.log("URL backend:", BACKEND_URL);
+    console.log("Data yang dikirim:", data);
+
     try {
       // Tentukan URL backend secara dinamis
       const isLocalhost = window.location.origin === "http://127.0.0.1:8080";
