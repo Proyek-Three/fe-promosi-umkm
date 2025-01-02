@@ -10,13 +10,13 @@
     />
     <link rel="stylesheet" href="../../assets/css/tailwind.output.css" />
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <script src="../../assets/js/data-produk.js"></script>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="../../assets/js/data-produk.js"></script>
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
@@ -55,7 +55,7 @@
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="../dashboard.html"
               >
-              <i class="fa-solid fa-house"></i>
+                <i class="fa-solid fa-house"></i>
                 <span class="ml-4">Dashboard</span>
               </a>
             </li>
@@ -66,12 +66,12 @@
                 href="../data-users/index.html"
               >
                 <i class="fa-solid fa-users"></i>
-                <span class="ml-4">Data Users</span>
+                <span class="ml-4">Users Data</span>
               </a>
             </li>
 
             <li class="relative px-6 py-3">
-                <span
+              <span
                 class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
               ></span>
@@ -80,7 +80,7 @@
                 href="index.html"
               >
                 <i class="fa-solid fa-table"></i>
-                <span class="ml-4">Data Produk</span>
+                <span class="ml-4">Product Data</span>
               </a>
             </li>
 
@@ -89,14 +89,11 @@
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="../data-kategori/index.html"
               >
-
                 <i class="fa-solid fa-list"></i>
-                <span class="ml-4">Data Kategori</span>
+                <span class="ml-4">Category Data</span>
               </a>
             </li>
           </ul>
-         
-          
         </div>
       </aside>
       <!-- Mobile sidebar -->
@@ -132,7 +129,6 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="../dashboard.html"
@@ -148,12 +144,12 @@
                 href="../data-users/index.html"
               >
                 <i class="fa-solid fa-users"></i>
-                <span class="ml-4">Data Users</span>
+                <span class="ml-4">Users Data</span>
               </a>
             </li>
 
             <li class="relative px-6 py-3">
-                <span
+              <span
                 class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
               ></span>
@@ -162,7 +158,7 @@
                 href="index.html"
               >
                 <i class="fa-solid fa-table"></i>
-                <span class="ml-4">Data Produk</span>
+                <span class="ml-4">Product Data</span>
               </a>
             </li>
 
@@ -171,9 +167,8 @@
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="../data-kategori/index.html"
               >
-
                 <i class="fa-solid fa-list"></i>
-                <span class="ml-4">Data Kategori</span>
+                <span class="ml-4">Category Data</span>
               </a>
             </li>
           </ul>
@@ -437,155 +432,74 @@
           </div>
         </header>
 
-
-
-       <!-- CONTENT -->
-<main class="h-full overflow-y-auto">
-  <div class="container px-6 mx-auto grid">
-    <h2
-      class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-    >
-      Data Produk
-    </h2>
-
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
-      <div class="w-full overflow-x-auto">
-        <table class="w-full whitespace-no-wrap table-auto">
-          <thead>
-            <tr
-              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+        <!-- CONTENT -->
+        <main class="h-full overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2
+              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              <th class="px-4 py-3">ID Produk</th>
-              <th class="px-4 py-3">ID Kategori</th>
-              <th class="px-4 py-3">Nama Produk</th>
-              <th class="px-4 py-3">Deskripsi</th>
-              <th class="px-4 py-3">Harga</th>
-              <th class="px-4 py-3">Foto</th>
-              <th class="px-4 py-3 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-            <tr class="text-gray-700 dark:text-gray-400">
-              <td class="px-4 py-3">
-                <p class="font-semibold">1</p>
-              </td>
-              <td class="px-4 py-3 text-sm">1</td>
-              <td class="px-4 py-3 text-sm">Dimsum</td>
-              <td class="px-4 py-3 text-sm">Enak banget cuy</td>
-              <td class="px-4 py-3 text-sm">Rp. 50.000</td>
-              <td class="px-4 py-3">
-                <img 
-                  src="https://www.unileverfoodsolutions.co.id/dam/global-ufs/mcos/SEA/calcmenu/recipes/ID-recipes/chicken-&-other-poultry-dishes/prawn---chicken-shumai-dimsum/Dimsum1260-700.jpg" 
-                  alt="Dimsum Image" 
-                  class="w-20 h-20 object-cover rounded-lg"
-                >
-              </td>
-              <td class="px-4 py-3 text-center">
-                <div class="flex items-center justify-center space-x-4">
-                  <!-- Dropdown untuk status -->
-                  <select id="status" 
-                    class="block w-40 p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onchange="updateDropdownColor(this)">
-                    <option selected disabled>Pilih Status</option>
-                    <option value="diterima">Accepted</option>
-                    <option value="ditolak">Rejected</option>
-                  </select>
-                  <!-- Tombol Delete -->
-                  <button
-                    class="flex items-center justify-between px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
-                    aria-label="Delete"
-                  >
-                    <i class="fa-solid fa-trash mr-2"></i> Hapus
-                  </button>
-                </div>
-              </td>
-              
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
+              Product Data
+            </h2>
 
-      <div
-        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-      >
-        <span class="flex items-center col-span-3">
-          Showing 1-1 of 1
-        </span>
-        <span class="col-span-2"></span>
-        <!-- Pagination -->
-        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-          <nav aria-label="Table navigation">
-            <ul class="inline-flex items-center">
-              <li>
-                <button
-                  class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                  aria-label="Previous"
-                >
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    aria-hidden="true"
-                    viewBox="0 0 20 20"
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap table-auto">
+                  <thead>
+                    <tr
+                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                    >
+                      <th class="px-4 py-3">Product Name</th>
+                      <th class="px-4 py-3">Category Name</th>
+                      <th class="px-4 py-3">Description</th>
+                      <th class="px-4 py-3">Price</th>
+                      <th class="px-4 py-3">Image</th>
+                      <th class="px-4 py-3 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                    <path
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </li>
-              <li>
-                <button
-                  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                >
-                  1
-                </button>
-              </li>
-              <li>
-                <button
-                  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                >
-                  2
-                </button>
-              </li>
-              <li>
-                <span class="px-3 py-1">...</span>
-              </li>
-              <li>
-                <button
-                  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                >
-                  4
-                </button>
-              </li>
-              <li>
-                <button
-                  class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                  aria-label="Next"
-                >
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    aria-hidden="true"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4-4a1 1 0 010 1.414l-4-4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </span>
-      </div>
-    </div>
-  </div>
-</main>
-<!-- CONTENT END -->
-
+                    <tr class="text-gray-700 dark:text-gray-400">
+                      <td class="px-4 py-3 text-sm">Dimsum</td>
+                      <td class="px-4 py-3 text-sm">Food</td>
+                      <td class="px-4 py-3 text-sm">Enak banget cuy</td>
+                      <td class="px-4 py-3 text-sm">Rp. 50.000</td>
+                      <td class="px-4 py-3">
+                        <img
+                          src="https://www.unileverfoodsolutions.co.id/dam/global-ufs/mcos/SEA/calcmenu/recipes/ID-recipes/chicken-&-other-poultry-dishes/prawn---chicken-shumai-dimsum/Dimsum1260-700.jpg"
+                          alt="Dimsum Image"
+                          class="w-20 h-20 object-cover rounded-lg"
+                        />
+                      </td>
+                      <td class="px-4 py-3 text-center">
+                        <div class="flex items-center justify-center space-x-4">
+                          <!-- Dropdown untuk status -->
+                          <select
+                            id="status"
+                            class="block w-40 p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onchange="updateDropdownColor(this)"
+                          >
+                            <option selected disabled>Select a Status</option>
+                            <option value="diterima">Accepted</option>
+                            <option value="ditolak">Rejected</option>
+                          </select>
+                          <!-- Tombol Delete -->
+                          <button
+                            class="flex items-center justify-between px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
+                            aria-label="Delete"
+                          >
+                            <i class="fa-solid fa-trash mr-2"></i> Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- CONTENT END -->
       </div>
     </div>
   </body>
