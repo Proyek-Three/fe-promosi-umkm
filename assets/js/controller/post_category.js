@@ -14,6 +14,7 @@ function pushData() {
   if (category_name.value === "") {
     alert("Harap pilih category terlebih dahulu");
   } else {
+    
     postData(urlPOST, data, AmbilResponse)
       .then((response) => {
         if (response.ok) {
