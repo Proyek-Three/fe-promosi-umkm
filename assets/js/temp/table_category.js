@@ -18,7 +18,7 @@ export let isiTabel =
           aria-label="Delete"
           type="button"
           id="del_button"
-          onclick="confirmDelete('#IDDELETE#')"
+          onclick="confirmDelete('#IDHAPUS#')"
         >
           <i class="fa-solid fa-trash"></i>
         </button>
