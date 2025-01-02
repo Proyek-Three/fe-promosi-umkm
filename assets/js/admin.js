@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(data.message);
   
         // Redirect atau lakukan tindakan lain setelah login berhasil
-        window.location.href = "/Admin/dashboard.html";
+        window.location.href = "../../Admin/dashboard.html";
         // Contoh: window.location.href = "/dashboard";
       } catch (error) {
         console.error("Error during login:", error);
