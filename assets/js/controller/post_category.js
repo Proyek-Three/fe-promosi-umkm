@@ -4,14 +4,14 @@ import { urlPOST, AmbilResponse } from "../config/url_post_category.js";
 
 function pushData() {
   let data = {
-    namakategori: getValue("category_name"),
+    category_name: getValue("category_name"),
   };
 
   console.log(data);
-  const namakategori = document.getElementById("category_name"); 
+  const category_name = document.getElementById("category_name"); 
 
 
-  if (namakategori.value === "") {
+  if (category_name.value === "") {
     alert("Harap pilih category terlebih dahulu");
   } else {
     postData(urlPOST, data, AmbilResponse)
