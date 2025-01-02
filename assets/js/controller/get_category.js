@@ -8,7 +8,7 @@ export function GetAllMenu(results) {
 
 function isiRow(value) {
     let content =
-        isiTabel.replace("#CATEGORYNAME#", value.category_name)
+        isiTabel.replace("#CATEGORYNAME#", value.category.category_name)
             .replace("#IDEDIT#", value._id)
             .replace("#IDDELETE#", value._id)    
     addInner("iniTabel", content);
