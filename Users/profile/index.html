@@ -40,17 +40,17 @@
           Dashboard
         </a>
         <a
-          href="index.html"
-          class="flex items-center active-nav-link text-white py-4 pl-6 nav-item"
+          href="../data-produk/index.html"
+          class="flex items-center text-white py-4 pl-6 nav-item"
         >
           <i class="fas fa-table mr-3"></i>
           Product Data
         </a>
         <a
           href="../profile/index.html"
-          class="flex items-center text-white py-4 pl-6 nav-item"
+          class="flex items-center active-nav-link text-white py-4 pl-6 nav-item"
         >
-        <i class="fa-solid fa-user mr-3"></i>
+          <i class="fa-solid fa-user mr-3"></i>
           Profile
         </a>
       </nav>
@@ -118,15 +118,15 @@
             Dashboard
           </a>
           <a
-            href="tables.html"
-            class="flex items-center active-nav-link text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
+            href="../data-produk/index.html"
+            class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
           >
             <i class="fas fa-table mr-3"></i>
             Product Data
           </a>
           <a
             href="../profile/index.html"
-            class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
+            class="flex items-center active-nav-link text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
           >
             <i class="fas fa-user mr-3"></i>
             Profile
@@ -144,111 +144,130 @@
       <!-- CONTENT -->
       <div class="px-6 py-8">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Add Product Data
+          Profile
         </h2>
         <form
           action="#"
           method="POST"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
         >
+          <h4 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Personal Information
+          </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Input Nama Produk -->
+            <!-- Input Username -->
             <div>
               <label
-                for="product_name"
+                for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Product Name
+                Username
               </label>
               <input
                 type="text"
-                id="product_name"
-                name="product_name"
+                id="username"
+                name="username"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Product Name"
+                placeholder="Username"
                 required
               />
             </div>
 
-            <!-- Input Harga Produk -->
+            <!-- Input Password -->
             <div>
               <label
-                for="price"
+                for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Price
+                Password
               </label>
               <input
-                type="number"
-                id="price"
-                name="price"
+                type="password"
+                id="password"
+                name="password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Price"
+                placeholder="Password"
                 required
               />
             </div>
-
-            <!-- Input Upload File -->
+            <!-- Input Phone Number -->
             <div>
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
-                >Upload file</label
-              >
-              <input
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                id="file_input"
-                type="file"
-              />
-            </div>
-
-            <!-- Input Kategori Produk -->
-            <div>
-              <label
-                for="category"
+                for="number"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Category
+                Phone Number
               </label>
-              <select
-                id="category"
-                name="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              <input
+                type="phone_number"
+                id="phone_number"
+                name="phone_number"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Phone Number"
                 required
+              />
+            </div>
+
+            <!-- Input Email -->
+            <div>
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                <option value="" disabled selected>Select Category</option>
-                <option value="elektronik">Foods</option>
-                <option value="fashion">Fashion</option>
-              </select>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Email"
+                required
+              />
             </div>
           </div>
 
-          <!-- Input Deskripsi Produk -->
-          <div class="mt-4">
+          <hr><br>
+          <h4 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Store Information
+          </h4>
+
+          <!-- Input Username -->
+          <div>
             <label
-              for="description"
+              for="username"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
-              Description
+              Store Name
+            </label>
+            <input
+              type="text"
+              id="store_name"
+              name="store_name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Store Name"
+              required
+            />
+          </div>
+
+          <!-- Input Address -->
+          <div class="mt-4">
+            <label
+              for="address"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Store Address
             </label>
             <textarea
-              id="description"
-              name="description"
+              id="address"
+              name="address"
               rows="4"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              placeholder="Description"
+              placeholder="Address"
               required
             ></textarea>
           </div>
 
-          <!-- Tombol Submit -->
-          <button
-            type="submit"
-            onclick="return window.location.href= 'index.html'"
-            class="mt-6 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-3 text-center dark:bg-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-          >
-            Back
-          </button>
           <button
             type="submit"
             class="mt-6 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-3 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
