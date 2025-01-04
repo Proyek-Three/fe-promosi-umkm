@@ -28,19 +28,59 @@ document.getElementById("loginButton").addEventListener("click", async function 
         if (response.ok) {
             // Ambil respon dari server
             const result = await response.json();
-            alert(result.message); // Tampilkan pesan sukses
 
             // Simpan token di localStorage untuk autentikasi
             localStorage.setItem("token", result.token);
 
-            // Redirect ke halaman utama/dashboard
-            window.location.href = "dashboard.html";
+            // Alert dan validasi profil UMKM
+            const profileComplete = result.profileComplete; // Asumsi server mengembalikan ini
+            if (!profileComplete) {
+                // Tampilkan SweetAlert untuk profil UMKM
+                Swal.fire({
+                    title: "Profil UMKM Tidak Lengkap",
+                    text: "Jika anda ingin lanjut promosi UMKM anda, anda diwajibkan mengisi profile UMKM anda dengan lengkap.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Isi Profil Sekarang",
+                    cancelButtonText: "Batal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect ke halaman form pengisian profil UMKM
+                        window.location.href = "../Users/profile/index.html";
+
+                    }
+                });
+            } else {
+                // Tampilkan pesan sukses dengan SweetAlert
+                Swal.fire({
+                    title: "Login Berhasil",
+                    text: result.message,
+                    icon: "success",
+                    confirmButtonText: "Lanjutkan",
+                }).then(() => {
+                    // Redirect ke halaman utama/dashboard
+                    window.location.href = "../Users/profile/index.html";
+
+                });
+            }
         } else {
             const error = await response.json();
-            alert(`Error: ${error.message}`);
+            // Tampilkan SweetAlert untuk error
+            Swal.fire({
+                title: "Error",
+                text: error.message,
+                icon: "error",
+                confirmButtonText: "Coba Lagi",
+            });
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred during login.");
+        // Tampilkan SweetAlert untuk error
+        Swal.fire({
+            title: "Terjadi Kesalahan",
+            text: "An error occurred during login.",
+            icon: "error",
+            confirmButtonText: "Coba Lagi",
+        });
     }
 });
