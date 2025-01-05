@@ -31,38 +31,21 @@ document.getElementById("loginButton").addEventListener("click", async function 
 
             // Simpan token di localStorage untuk autentikasi
             localStorage.setItem("token", result.token);
+            
+            // Simpan data user selain password di localStorage (untuk autofill)
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("email", data.email);
 
-            // Alert dan validasi profil UMKM
-            const profileComplete = result.profileComplete; // Asumsi server mengembalikan ini
-            if (!profileComplete) {
-                // Tampilkan SweetAlert untuk profil UMKM
-                Swal.fire({
-                    title: "Profil UMKM Tidak Lengkap",
-                    text: "Jika anda ingin lanjut promosi UMKM anda, anda diwajibkan mengisi profile UMKM anda dengan lengkap.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Isi Profil Sekarang",
-                    cancelButtonText: "Batal",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect ke halaman form pengisian profil UMKM
-                        window.location.href = "../Users/profile/index.html";
-
-                    }
-                });
-            } else {
-                // Tampilkan pesan sukses dengan SweetAlert
-                Swal.fire({
-                    title: "Login Berhasil",
-                    text: result.message,
-                    icon: "success",
-                    confirmButtonText: "Lanjutkan",
-                }).then(() => {
-                    // Redirect ke halaman utama/dashboard
-                    window.location.href = "../Users/profile/index.html";
-
-                });
-            }
+            // Tampilkan pesan sukses dengan SweetAlert
+            Swal.fire({
+                title: "Login Berhasil",
+                text: "Anda berhasil login.",
+                icon: "success",
+                confirmButtonText: "Lanjutkan",
+            }).then(() => {
+                // Redirect ke halaman utama/index
+                window.location.href = "../Users/profile/index.html";
+            });
         } else {
             const error = await response.json();
             // Tampilkan SweetAlert untuk error
