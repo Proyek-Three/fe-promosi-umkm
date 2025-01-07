@@ -12,7 +12,7 @@ export function GetAllProduct(results) {
 function isiRow(value) {
     let content =
         isiTabel.replace("#PRODUCTNAME#", value.product_name)
-            .replace("#CATEGORYNAME#", value.category_name)
+            .replace("#CATEGORYNAME#", value.category.category_name)
             .replace("#DESCRIPTION#", value.description)
             .replace("#PRICE#", value.price)
             .replace("#IMAGE#", value.image)

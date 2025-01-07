@@ -11,7 +11,6 @@ export let isiTabel =
                       <td class="px-4 py-3">
                         <img
                           src="#IMAGE#"
-                          alt="ProductImage"
                           class="w-20 h-20 object-cover rounded-lg"
                         />
                       </td>
