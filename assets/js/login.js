@@ -44,7 +44,7 @@ document.getElementById("loginButton").addEventListener("click", async function 
                 confirmButtonText: "Lanjutkan",
             }).then(() => {
                 // Redirect ke halaman utama/index
-                window.location.href = "../Users/profile/index.html";
+                window.location.href = "../Users/dashboard.html";
             });
         } else {
             const error = await response.json();
@@ -66,4 +66,4 @@ document.getElementById("loginButton").addEventListener("click", async function 
             confirmButtonText: "Coba Lagi",
         });
     }
-});
+}); 

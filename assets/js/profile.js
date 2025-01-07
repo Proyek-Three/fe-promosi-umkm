@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!errorMessage || !errorMessage.classList.contains("error-message")) {
           const error = document.createElement("p");
-          error.textContent = `${input.placeholder} is required.`;
+          error.textContent = `${input.placeholder} is required.`; // Perbaiki dengan backticks
           error.classList.add("error-message", "text-red-500", "text-sm", "mt-1");
           input.parentElement.appendChild(error);
         }
@@ -108,3 +108,90 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+// Fungsi untuk menampilkan username di dropdown
+function loadUserProfile() {
+  const username = localStorage.getItem("username");
+  console.log("Username:", username); // Debug log
+
+  if (username) {
+    const dropdownUsername = document.getElementById("dropdownUsername");
+    if (dropdownUsername) {
+      dropdownUsername.textContent = username; // Menampilkan username
+    } else {
+      console.error("Element with ID 'dropdownUsername' not found");
+    }
+  } else {
+    console.warn("Username not found in localStorage. Redirecting to login...");
+    // Jika username tidak ditemukan, redirect ke halaman login
+    window.location.href = "../auth/login.html";
+  }
+}
+
+// Fungsi untuk membuat dan menampilkan toast di tengah layar
+function showLogoutToast() {
+  const toast = document.createElement("div");
+  toast.style.position = "fixed";
+  toast.style.top = "50%";  // Posisi di tengah layar secara vertikal
+  toast.style.left = "50%";  // Posisi di tengah layar secara horizontal
+  toast.style.transform = "translate(-50%, -50%)";  // Menyeimbangkan posisi di tengah
+  toast.style.backgroundColor = "#4caf50";
+  toast.style.color = "white";
+  toast.style.padding = "20px 40px";  // Padding lebih besar
+  toast.style.borderRadius = "10px";  // Menambah kelengkungan border
+  toast.style.fontSize = "20px";  // Memperbesar ukuran font
+  toast.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.3)";  // Menambah bayangan
+  toast.style.zIndex = "9999";
+  toast.style.textAlign = "center";  // Menyelaraskan teks ke tengah
+  toast.textContent = "Akun Anda berhasil keluar";
+
+  // Menambahkan toast ke body
+  document.body.appendChild(toast);
+
+  // Menghilangkan toast setelah beberapa detik
+  setTimeout(() => {
+    toast.style.transition = "opacity 0.5s";
+    toast.style.opacity = "0";
+    setTimeout(() => {
+      toast.remove();
+    }, 500);
+  }, 2000);
+}
+
+// Fungsi untuk logout dengan toast
+function logoutUser() {
+  console.log("Logging out..."); // Debug log
+  // Hapus data login dari localStorage
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  localStorage.removeItem("email");
+
+  // Tampilkan toast
+  showLogoutToast();
+
+  // Redirect ke halaman login setelah beberapa detik
+  setTimeout(() => {
+    window.location.href = "../auth/login.html";
+  }, 2500);
+}
+
+// Event listener untuk DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Page loaded, running loadUserProfile...");
+
+  // Jalankan fungsi loadUserProfile untuk menampilkan username
+  loadUserProfile();
+
+  // Pastikan elemen logoutButton sudah ter-load sebelum menambahkan event listener
+  const logoutButton = document.getElementById("logoutButton");
+  if (logoutButton) {
+    console.log("Logout button found, adding event listener...");
+    logoutButton.addEventListener("click", logoutUser);
+  } else {
+    console.error("Element with ID 'logoutButton' not found in DOM!");
+  }
+});
+
+
+
+
+
