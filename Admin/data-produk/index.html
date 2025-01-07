@@ -198,8 +198,8 @@
                 ></path>
               </svg>
             </button>
-             <!-- SEARCH INPUT -->
-             <div class="flex justify-center flex-1 lg:mr-32">
+            <!-- SEARCH INPUT -->
+            <div class="flex justify-center flex-1 lg:mr-32">
               <div
                 class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
               >
@@ -216,133 +216,132 @@
             </div>
             <!-- SEARCH INPUT END -->
 
-              <!-- THEME -->
-              <ul class="flex items-center flex-shrink-0 space-x-6">
-                <!-- Theme toggler -->
-                <li class="flex">
-                  <button
-                    class="rounded-md focus:outline-none focus:shadow-outline-purple"
-                    @click="toggleTheme"
-                    aria-label="Toggle color mode"
-                  >
-                    <template x-if="!dark">
-                      <i class="fa-solid fa-moon"></i>
-                    </template>
-                    <template x-if="dark">
-                      <i class="fa-solid fa-sun"></i>
-                    </template>
-                  </button>
-                </li>
-  
-                <!-- NOTIFICATION MENU -->
-                <li class="relative">
-                  <button
-                    class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
-                    @click="toggleNotificationsMenu"
-                    @keydown.escape="closeNotificationsMenu"
-                    aria-label="Notifications"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa-solid fa-bell"></i>
-                    <!-- Notification badge -->
-                    <span
-                      aria-hidden="true"
-                      class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
-                    ></span>
-                  </button>
-                  <template x-if="isNotificationsMenuOpen">
-                    <ul
-                      x-transition:leave="transition ease-in duration-150"
-                      x-transition:leave-start="opacity-100"
-                      x-transition:leave-end="opacity-0"
-                      @click.away="closeNotificationsMenu"
-                      @keydown.escape="closeNotificationsMenu"
-                      class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
-                    >
-                      <li class="flex">
-                        <a
-                          class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
-                        >
-                          <span>Messages</span>
-                          <span
-                            class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
-                          >
-                            13
-                          </span>
-                        </a>
-                      </li>
-                      <li class="flex">
-                        <a
-                          class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
-                        >
-                          <span>Sales</span>
-                          <span
-                            class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
-                          >
-                            2
-                          </span>
-                        </a>
-                      </li>
-                      <li class="flex">
-                        <a
-                          class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
-                        >
-                          <span>Alerts</span>
-                        </a>
-                      </li>
-                    </ul>
+            <!-- THEME -->
+            <ul class="flex items-center flex-shrink-0 space-x-6">
+              <!-- Theme toggler -->
+              <li class="flex">
+                <button
+                  class="rounded-md focus:outline-none focus:shadow-outline-purple"
+                  @click="toggleTheme"
+                  aria-label="Toggle color mode"
+                >
+                  <template x-if="!dark">
+                    <i class="fa-solid fa-moon"></i>
                   </template>
-                </li>
-                <!-- Profile menu -->
-                <li class="relative">
-                  <button
-                    class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
-                    @click="toggleProfileMenu"
-                    @keydown.escape="closeProfileMenu"
-                    aria-label="Account"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa-solid fa-user"></i>
-                  </button>
-                  <template x-if="isProfileMenuOpen">
-                    <ul
-                      x-transition:leave="transition ease-in duration-150"
-                      x-transition:leave-start="opacity-100"
-                      x-transition:leave-end="opacity-0"
-                      @click.away="closeProfileMenu"
-                      @keydown.escape="closeProfileMenu"
-                      class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
-                      aria-label="submenu"
-                    >
-                      <li class="flex">
-                        <a
-                          class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
-                        >
-                          <span><i class="fa-regular fa-user"></i> Profile</span>
-                        </a>
-                      </li>
-  
-                      <li class="flex">
-                        <a
-                          class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
-                        >
-                          <span
-                            ><i class="fa-solid fa-right-from-bracket"></i>
-                            Logout</span
-                          >
-                        </a>
-                      </li>
-                    </ul>
+                  <template x-if="dark">
+                    <i class="fa-solid fa-sun"></i>
                   </template>
-                </li>
-              </ul>
-            <!-- THEME END -->
+                </button>
+              </li>
 
+              <!-- NOTIFICATION MENU -->
+              <li class="relative">
+                <button
+                  class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
+                  @click="toggleNotificationsMenu"
+                  @keydown.escape="closeNotificationsMenu"
+                  aria-label="Notifications"
+                  aria-haspopup="true"
+                >
+                  <i class="fa-solid fa-bell"></i>
+                  <!-- Notification badge -->
+                  <span
+                    aria-hidden="true"
+                    class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
+                  ></span>
+                </button>
+                <template x-if="isNotificationsMenuOpen">
+                  <ul
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    @click.away="closeNotificationsMenu"
+                    @keydown.escape="closeNotificationsMenu"
+                    class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
+                  >
+                    <li class="flex">
+                      <a
+                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        href="#"
+                      >
+                        <span>Messages</span>
+                        <span
+                          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
+                        >
+                          13
+                        </span>
+                      </a>
+                    </li>
+                    <li class="flex">
+                      <a
+                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        href="#"
+                      >
+                        <span>Sales</span>
+                        <span
+                          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
+                        >
+                          2
+                        </span>
+                      </a>
+                    </li>
+                    <li class="flex">
+                      <a
+                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        href="#"
+                      >
+                        <span>Alerts</span>
+                      </a>
+                    </li>
+                  </ul>
+                </template>
+              </li>
+              <!-- Profile menu -->
+              <li class="relative">
+                <button
+                  class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+                  @click="toggleProfileMenu"
+                  @keydown.escape="closeProfileMenu"
+                  aria-label="Account"
+                  aria-haspopup="true"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+                <template x-if="isProfileMenuOpen">
+                  <ul
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    @click.away="closeProfileMenu"
+                    @keydown.escape="closeProfileMenu"
+                    class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
+                    aria-label="submenu"
+                  >
+                    <li class="flex">
+                      <a
+                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        href="#"
+                      >
+                        <span><i class="fa-regular fa-user"></i> Profile</span>
+                      </a>
+                    </li>
+
+                    <li class="flex">
+                      <a
+                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        href="#"
+                      >
+                        <span
+                          ><i class="fa-solid fa-right-from-bracket"></i>
+                          Logout</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </template>
+              </li>
+            </ul>
+            <!-- THEME END -->
           </div>
         </header>
 
@@ -357,7 +356,10 @@
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap table-auto">
+                <table
+                  class="w-full whitespace-no-wrap table-auto"
+                  id="iniTabel"
+                >
                   <thead>
                     <tr
                       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
@@ -370,44 +372,7 @@
                       <th class="px-4 py-3 text-center">Actions</th>
                     </tr>
                   </thead>
-                  <tbody
-                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                  >
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3 text-sm">Dimsum</td>
-                      <td class="px-4 py-3 text-sm">Food</td>
-                      <td class="px-4 py-3 text-sm">Makanan ini lezat</td>
-                      <td class="px-4 py-3 text-sm">Rp. 50.000</td>
-                      <td class="px-4 py-3">
-                        <img
-                          src="https://www.unileverfoodsolutions.co.id/dam/global-ufs/mcos/SEA/calcmenu/recipes/ID-recipes/chicken-&-other-poultry-dishes/prawn---chicken-shumai-dimsum/Dimsum1260-700.jpg"
-                          alt="Dimsum Image"
-                          class="w-20 h-20 object-cover rounded-lg"
-                        />
-                      </td>
-                      <td class="px-4 py-3 text-center">
-                        <div class="flex items-center justify-center space-x-4">
-                          <!-- Dropdown untuk status -->
-                          <select
-                            id="status"
-                            class="block w-40 p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            onchange="updateDropdownColor(this)"
-                          >
-                            <option selected disabled>Select a Status</option>
-                            <option value="diterima">Accepted</option>
-                            <option value="ditolak">Rejected</option>
-                          </select>
-                          <!-- Tombol Delete -->
-                          <button
-                            class="flex items-center justify-between px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
-                            aria-label="Delete"
-                          >
-                            <i class="fa-solid fa-trash mr-2"></i> Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                  <!-- ISI  -->
                 </table>
               </div>
             </div>
@@ -417,4 +382,7 @@
       </div>
     </div>
   </body>
+  <!-- Fetch -->
+  <script type="module" src="../../assets/js/fetch_product.js"></script>
+  <!-- <script src="../../assets/js/controller/delete_category.js"></script> -->
 </html>
