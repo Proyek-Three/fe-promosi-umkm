@@ -11,10 +11,10 @@ function pushData() {
     category: {
         categoryname: getValue("category_name"),
     },
-    store: {
-      storename: getValue("store_name"),
-      address: getValue("address"),
-    },
+    // store: {
+    //   storename: getValue("store_name"),
+    //   address: getValue("address"),
+    // },
   };
 
   console.log(data);
