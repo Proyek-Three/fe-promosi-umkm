@@ -50,7 +50,7 @@
           href="../profile/index.html"
           class="flex items-center text-white py-4 pl-6 nav-item"
         >
-        <i class="fa-solid fa-user mr-3"></i>
+          <i class="fa-solid fa-user mr-3"></i>
           Profile
         </a>
       </nav>
@@ -197,8 +197,9 @@
               >
               <input
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                id="file_input"
                 type="file"
+                id="image"
+                name="image"
               />
             </div>
 
@@ -211,17 +212,18 @@
                 Category
               </label>
               <select
-                id="category"
-                name="category"
+                id="category_name"
+                name="category_name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 required
               >
                 <option value="" disabled selected>Select Category</option>
-                <option value="elektronik">Foods</option>
-                <option value="fashion">Fashion</option>
               </select>
             </div>
           </div>
+          <script>
+
+          </script>
 
           <!-- Input Deskripsi Produk -->
           <div class="mt-4">
@@ -261,6 +263,7 @@
       <!-- CONTENT END -->
     </div>
 
+    <script src="../../assets/js/category.js"></script>
     <!-- AlpineJS -->
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
