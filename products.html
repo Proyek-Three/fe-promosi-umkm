@@ -126,10 +126,10 @@
               >Sign Up</a
             >
             <a
-            href="auth/admin/login.html"
-            class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:ml-2 lg:ml-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-            >For Admin</a
-          >
+              href="auth/admin/login.html"
+              class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:ml-2 lg:ml-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+              >For Admin</a
+            >
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -195,9 +195,9 @@
               </li>
               <li>
                 <a
-                href="#team"
-                class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >Team</a
+                  href="#team"
+                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Team</a
                 >
               </li>
               <li>
@@ -220,20 +220,17 @@
       </nav>
     </header>
 
-
     <!-- CONTENT -->
-     <br><br>
+    <br /><br />
     <div class="bg-purple-900 py-16">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-white mb-8">
           Introducing Our Products
         </h2>
         <div class="mydict text-center mb-8" id="filter-container">
-         <!-- ISI KATEGORI -->
+          <!-- ISI KATEGORI -->
         </div>
 
-        
-        <
         <div
           class="grid grid-cols-1 md:grid-cols-3 gap-8"
           id="product-container"
@@ -268,78 +265,43 @@
               Product Details
             </button>
           </div>
-          
-
-          <!-- Product 2 -->
-          <div
-            class="bg-white rounded-lg shadow-lg p-8 product-item"
-            data-category="drink"
-            data-name="Drink Product"
-            data-store="Bagi Kopi"
-            data-price="Rp. 20.000"
-            data-description="Lemonade biru alami dari bunga telang, dengan rasa asam manis yang unik dan memanjakan mata."
-            data-address="123 Food Street, Culinary City"
-          >
-            <img
-              class="object-cover w-full h-48 rounded-t-lg"
-              src="https://www.sasa.co.id/medias/page_medias/7-Butterfly-Pea-In-My-Lemonade.jpeg"
-              alt="Food Product"
-            />
-            <h3 class="text-xl font-bold text-gray-900 mt-4">Blue Pea Lemonade</h3>
-            <h4 class="text-gray-500 font-bold text-sm mt-2">Rp. 20.000</h4>
-            <p class="text-gray-500 text-sm text-justify mt-2">
-              Lemonade biru alami dari bunga telang, dengan rasa asam manis yang unik dan memanjakan mata.
-            </p>
-            <button
-              type="button"
-              class="mt-4 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              onclick="showModal(this)"
-            >
-              Product Details
-            </button>
-          </div>
-
-          <!-- Product 3 -->
-          <div
-            class="bg-white rounded-lg shadow-lg p-8 product-item"
-            data-category="shoes"
-            data-name="Shoes Product"
-            data-store="Nike"
-            data-price="Rp. 4.500.000"
-            data-description="Nike Air Max, sepatu dengan bantalan udara untuk kenyamanan dan gaya maksimal."
-            data-address="Sudirman Street, Jakarta City"
-          >
-            <img
-              class="object-cover w-full h-48 rounded-t-lg"
-              src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//98/MTA-53016991/nike_sepatu_nike_air_max_97_og_dm0028001_full03_itvmt3d8.jpg"
-              alt="Food Product"
-            />
-            <h3 class="text-xl font-bold text-gray-900 mt-4">Nike Air Max</h3>
-            <h4 class="text-gray-500 font-bold text-sm mt-2">Rp. 4.500.000</h4>
-            <p class="text-gray-500 text-sm text-justify mt-2">
-              Nike Air Max, sepatu dengan bantalan udara untuk kenyamanan dan gaya maksimal.
-            </p>
-            <button
-              type="button"
-              class="mt-4 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              onclick="showModal(this)"
-            >
-              Product Details
-            </button>
-          </div>
         </div>
       </div>
     </div>
 
     <!-- MODAL -->
-    <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-      <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 transform transition-transform duration-300 scale-95">
+    <div
+      id="productModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div
+        class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 transform transition-transform duration-300 scale-95"
+      >
         <!-- Modal Header -->
         <div class="flex justify-between items-center border-b pb-3">
-          <h2 id="modalProductName" class="text-2xl font-semibold text-gray-800">Product Details</h2>
-          <button onclick="closeModal()" class="text-gray-600 hover:text-gray-800 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <h2
+            id="modalProductName"
+            class="text-2xl font-semibold text-gray-800"
+          >
+            Product Details
+          </h2>
+          <button
+            onclick="closeModal()"
+            class="text-gray-600 hover:text-gray-800 focus:outline-none"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -347,7 +309,12 @@
         <div class="mt-4">
           <div class="flex items-start">
             <!-- Product Image -->
-            <img id="modalProductImage" class="w-1/3 h-32 object-cover rounded-lg shadow-md" src="" alt="Product Image" />
+            <img
+              id="modalProductImage"
+              class="w-1/3 h-32 object-cover rounded-lg shadow-md"
+              src=""
+              alt="Product Image"
+            />
             <!-- Product Details -->
             <div class="ml-4 w-2/3">
               <p class="text-gray-600 text-lg font-semibold">
@@ -357,7 +324,8 @@
                 <strong>Price:</strong> <span id="modalPrice"></span>
               </p>
               <p class="text-gray-600 text-sm mt-2">
-                <strong>Description:</strong> <span id="modalDescription"></span>
+                <strong>Description:</strong>
+                <span id="modalDescription"></span>
               </p>
               <p class="text-gray-600 text-sm mt-2">
                 <strong>Address:</strong> <span id="modalAddress"></span>
@@ -367,7 +335,10 @@
         </div>
         <!-- Modal Footer -->
         <div class="mt-6 flex justify-end">
-          <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+          <button
+            onclick="closeModal()"
+            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none"
+          >
             Cancel
           </button>
           <!-- <button class="ml-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:from-purple-700 hover:to-blue-600 focus:outline-none">
@@ -485,6 +456,6 @@
     <!-- FOOTER END  -->
 
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
-    <script src="assets/js/products.js"></script>
+    <script src="assets/js/category.js"></script>
   </body>
 </html>
