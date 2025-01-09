@@ -6,7 +6,7 @@ function confirmDelete(IDHAPUS) {
 
 function deleteData(IDHAPUS) {
     var productId = IDHAPUS;
-    var target_url = "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product//delete/" + productId;
+    var target_url = "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product/delete/" + productId;
 
     var requestOptions = {
         method: 'DELETE',
