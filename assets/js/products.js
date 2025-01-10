@@ -1,107 +1,81 @@
-// Fetch untuk filter kategori
-const apiUrl = "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/category";
-      
-async function fetchCategories() {
+// Ambil elemen container produk
+const productContainer = document.getElementById("product-container");
+
+// Fungsi untuk mengambil data produk dari API
+async function fetchProducts() {
   try {
-    const response = await fetch(apiUrl);
-    const categories = await response.json();
+    const response = await fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-    const container = document.getElementById('filter-container');
+    const products = await response.json();
 
-    // Tambahkan kategori "All" secara manual
-    container.innerHTML = `
-      <span
-        class="filter-category active"
-        data-category="all"
-        onclick="filterProducts(this)"
-      >
-        All
-      </span>
-    `;
+    // Bersihkan container produk sebelum menambahkan data baru
+    productContainer.innerHTML = "";
 
-    // Render kategori lainnya berdasarkan data dari API
-    categories.forEach(category => {
-      const span = document.createElement('span');
-      span.className = 'filter-category';
-      span.dataset.category = category.category_name.toLowerCase(); // Menggunakan slug nama kategori
-      span.onclick = () => filterProducts(span);
-      span.textContent = category.category_name;
-
-      container.appendChild(span);
+    // Iterasi setiap produk dan tambahkan ke dalam container
+    products.forEach((product) => {
+      const productCard = `
+        <div
+          class="bg-white rounded-lg shadow-lg p-8 product-item"
+          data-category="${product.category.category_name.toLowerCase()}" 
+          data-name="${product.product_name}"
+          data-store="${product.store.store_name}"
+          data-price="Rp. ${product.price.toLocaleString()}"
+          data-description="${product.description}"
+          data-address="${product.store.address}"
+        >
+          <img
+            class="object-cover w-full h-48 rounded-t-lg"
+            src="${product.image}"
+            alt="${product.product_name}"
+          />
+          <h3 class="text-xl font-bold text-gray-900 mt-4">${product.product_name}</h3>
+          <h4 class="text-gray-500 font-bold text-sm mt-2">Rp. ${product.price.toLocaleString()}</h4>
+          <p class="text-gray-500 text-sm text-justify mt-2">
+            ${product.description}
+          </p>
+          <button
+            type="button"
+            class="mt-4 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            onclick="showModal(this)"
+          >
+            Product Details
+          </button>
+        </div>
+      `;
+      productContainer.innerHTML += productCard;
     });
   } catch (error) {
-    console.error("Gagal memuat kategori:", error);
+    console.error("Gagal mengambil data produk:", error);
   }
 }
 
-// Panggil fungsi untuk memuat kategori saat halaman dimuat
-document.addEventListener('DOMContentLoaded', fetchCategories);
+// Panggil fungsi untuk mengambil data produk saat halaman dimuat
+fetchProducts();
 
-// Fungsi untuk menangani filter
-function filterProducts(element) {
-  const category = element.dataset.category;
+// Fungsi untuk menampilkan modal dengan informasi produk
+function showModal(button) {
+  const product = button.closest(".product-item");
+  const modal = document.getElementById("productModal");
 
-  // Hilangkan class 'active' dari semua elemen kategori
-  document.querySelectorAll('.filter-category').forEach(el => el.classList.remove('active'));
+  // Perbarui isi modal dengan informasi produk
+  document.getElementById("modalProductName").textContent = product.getAttribute("data-name");
+  document.getElementById("modalStoreName").textContent = product.getAttribute("data-store");
+  document.getElementById("modalPrice").textContent = product.getAttribute("data-price");
+  document.getElementById("modalDescription").textContent = product.getAttribute("data-description");
+  document.getElementById("modalAddress").textContent = product.getAttribute("data-address");
+  document.getElementById("modalProductImage").src = product.querySelector("img").src;
 
-  // Tambahkan class 'active' pada elemen yang dipilih
-  element.classList.add('active');
-
-  // Implementasikan logika filter produk (sesuai kebutuhan Anda)
-  console.log(`Produk difilter berdasarkan kategori: ${category}`);
+  // Tampilkan modal dengan animasi
+  modal.classList.remove("hidden");
+  setTimeout(() => modal.querySelector(".transform").classList.remove("scale-95"));
 }
 
-function filterProducts(selectedCategory) {
-    // Remove 'active' class from all filter buttons
-    document.querySelectorAll('.filter-category').forEach((el) => {
-      el.classList.remove('active');
-    });
-
-    // Add 'active' class to the clicked filter button
-    selectedCategory.classList.add('active');
-
-    // Get the selected category
-    const category = selectedCategory.getAttribute('data-category');
-    const products = document.querySelectorAll('.product-item');
-
-    // Filter products
-    products.forEach((product) => {
-      const productCategory = product.getAttribute('data-category');
-
-      if (category === 'all' || productCategory === category) {
-        product.classList.add('show'); // Show matched products
-      } else {
-        product.classList.remove('show'); // Hide unmatched products
-      }
-    });
-  }
-
-  // Initialize with "All" filter
-  document.addEventListener('DOMContentLoaded', () => {
-    filterProducts(document.querySelector('.filter-category.active'));
-  });
-
-
-
-  function showModal(button) {
-    const product = button.closest('.product-item');
-    const modal = document.getElementById('productModal');
-
-    // Update modal content
-    document.getElementById('modalProductName').textContent = product.getAttribute('data-name');
-    document.getElementById('modalStoreName').textContent = product.getAttribute('data-store');
-    document.getElementById('modalPrice').textContent = product.getAttribute('data-price');
-    document.getElementById('modalDescription').textContent = product.getAttribute('data-description');
-    document.getElementById('modalAddress').textContent = product.getAttribute('data-address');
-    document.getElementById('modalProductImage').src = product.querySelector('img').src;
-
-    // Show modal with animation
-    modal.classList.remove('hidden');
-    setTimeout(() => modal.querySelector('.transform').classList.remove('scale-95'));
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('productModal');
-    modal.querySelector('.transform').classList.add('scale-95');
-    setTimeout(() => modal.classList.add('hidden'), 300);
-  }
+// Fungsi untuk menutup modal
+function closeModal() {
+  const modal = document.getElementById("productModal");
+  modal.querySelector(".transform").classList.add("scale-95");
+  setTimeout(() => modal.classList.add("hidden"), 300);
+}

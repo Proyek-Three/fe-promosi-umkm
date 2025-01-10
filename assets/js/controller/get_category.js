@@ -11,7 +11,7 @@ export function GetAllCategory(results) {
 
 function isiRow(value) {
     let content =
-        isiTabel.replace("#CATEGORYNAME#", value.category.category_name)
+        isiTabel.replace("#CATEGORYNAME#", value.category_name)
             .replace("#IDEDIT#", value.id)
             .replace("#IDHAPUS#", value.id)    
     addInner("iniTabel", content);
