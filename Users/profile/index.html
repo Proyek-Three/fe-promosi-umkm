@@ -16,6 +16,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../../assets/css/users.css" />
   <script src="../../assets/js/profile.js"></script>
+  <script src="../../assets/js/fetchusers.js"></script>
 </head>
 
 <body class="bg-gray-100 font-family-karla flex">
@@ -105,7 +106,7 @@
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
         Profile
       </h2>
-      <form action="#" method="POST" class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
+      <form id="userForm" action="#" method="POST" class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
         <h4 class="text-xl font-semibold text-gray-900 dark:text-white">
           Personal Information
         </h4>
@@ -119,7 +120,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Username" required />
           </div>
-
+    
           <!-- Input Password -->
           <div>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -129,6 +130,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Password" required />
           </div>
+    
           <!-- Input Phone Number -->
           <div>
             <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -138,7 +140,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Phone Number" required />
           </div>
-
+    
           <!-- Input Email -->
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -149,24 +151,24 @@
               placeholder="Email" required />
           </div>
         </div>
-
+    
         <hr />
         <br />
         <h4 class="text-xl font-semibold text-gray-900 dark:text-white">
           Store Information
         </h4>
-
-        <!-- Input Username -->
+    
+        <!-- Input Store Name -->
         <div>
-          <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+          <label for="store_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
             Store Name
           </label>
           <input type="text" id="store_name" name="store_name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             placeholder="Store Name" required />
         </div>
-
-        <!-- Input Address -->
+    
+        <!-- Input Store Address -->
         <div class="mt-4">
           <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
             Store Address
@@ -175,13 +177,14 @@
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             placeholder="Address" required></textarea>
         </div>
-
+    
         <button type="submit"
           class="mt-6 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-3 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
           Submit
         </button>
       </form>
     </div>
+    
 
     <!-- CONTENT END -->
   </div>
