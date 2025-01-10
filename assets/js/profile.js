@@ -108,26 +108,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-// Fungsi untuk menampilkan username di dropdown
-function loadUserProfile() {
-  const username = localStorage.getItem("username");
-  console.log("Username:", username); // Debug log
+// Fungsi untuk membuat dan menampilkan modal peringatan sebelum logout
+function showLogoutConfirmation() {
+  const modal = document.createElement("div");
+  modal.id = "logout-confirmation-modal";
+  modal.className =
+    "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
 
-  if (username) {
-    const dropdownUsername = document.getElementById("dropdownUsername");
-    if (dropdownUsername) {
-      dropdownUsername.textContent = username; // Menampilkan username
-    } else {
-      console.error("Element with ID 'dropdownUsername' not found");
-    }
-  } else {
-    console.warn("Username not found in localStorage. Redirecting to login...");
-    // Jika username tidak ditemukan, redirect ke halaman login
-    window.location.href = "../auth/login.html";
-  }
+  const modalContent = document.createElement("div");
+  modalContent.className =
+    "bg-white rounded-lg shadow-lg p-6 max-w-sm text-center";
+
+  const title = document.createElement("h2");
+  title.className = "text-lg font-bold text-gray-900";
+  title.textContent = "Konfirmasi Logout";
+
+  const message = document.createElement("p");
+  message.className = "mt-4 text-gray-700";
+  message.textContent = "Apakah Anda yakin ingin logout?";
+
+  // Tombol Ya untuk logout
+  const confirmButton = document.createElement("button");
+  confirmButton.className =
+    "mt-6 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg mr-2";
+  confirmButton.textContent = "Ya";
+
+  // Tombol Tidak untuk membatalkan logout
+  const cancelButton = document.createElement("button");
+  cancelButton.className =
+    "mt-6 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg";
+  cancelButton.textContent = "Tidak";
+
+  // Event untuk tombol Ya
+  confirmButton.addEventListener("click", function () {
+    logoutUser(); // Melanjutkan proses logout
+    document.body.removeChild(modal); // Menghapus modal setelah logout
+  });
+
+  // Event untuk tombol Tidak
+  cancelButton.addEventListener("click", function () {
+    document.body.removeChild(modal); // Menutup modal tanpa logout
+  });
+
+  // Menambahkan elemen ke dalam modal
+  modalContent.appendChild(title);
+  modalContent.appendChild(message);
+  modalContent.appendChild(confirmButton);
+  modalContent.appendChild(cancelButton);
+  modal.appendChild(modalContent);
+
+  // Menambahkan modal ke dalam body
+  document.body.appendChild(modal);
 }
 
-// Fungsi untuk membuat dan menampilkan toast di tengah layar
+// Fungsi untuk membuat dan menampilkan toast setelah logout
 function showLogoutToast() {
   const toast = document.createElement("div");
   toast.style.position = "fixed";
@@ -157,9 +191,10 @@ function showLogoutToast() {
   }, 2000);
 }
 
-// Fungsi untuk logout dengan toast
+// Fungsi untuk logout dan menampilkan toast
 function logoutUser() {
   console.log("Logging out..."); // Debug log
+
   // Hapus data login dari localStorage
   localStorage.removeItem("token");
   localStorage.removeItem("username");
@@ -181,15 +216,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // Jalankan fungsi loadUserProfile untuk menampilkan username
   loadUserProfile();
 
-  // Pastikan elemen logoutButton sudah ter-load sebelum menambahkan event listener
   const logoutButton = document.getElementById("logoutButton");
   if (logoutButton) {
     console.log("Logout button found, adding event listener...");
-    logoutButton.addEventListener("click", logoutUser);
+    // Ganti event listener logout untuk menunjukkan konfirmasi logout
+    logoutButton.addEventListener("click", function () {
+      showLogoutConfirmation(); // Tampilkan modal konfirmasi logout
+    });
   } else {
     console.error("Element with ID 'logoutButton' not found in DOM!");
   }
 });
+
+// Fungsi untuk menampilkan username di dropdown
+function loadUserProfile() {
+  const username = localStorage.getItem("username");
+  console.log("Username:", username); // Debug log
+
+  if (username) {
+    const dropdownUsername = document.getElementById("dropdownUsername");
+    if (dropdownUsername) {
+      dropdownUsername.textContent = username; // Menampilkan username
+    } else {
+      console.error("Element with ID 'dropdownUsername' not found");
+    }
+  } else {
+    console.warn("Username not found in localStorage. Redirecting to login...");
+    // Jika username tidak ditemukan, redirect ke halaman login
+    window.location.href = "../auth/login.html";
+  }
+}
 
 
 
