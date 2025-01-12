@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             showConfirmButton: false
           });
           setTimeout(() => {
-            window.location.href = './auth/admin/login.html';
+            window.location.href = '../auth/admin/login.html';
           }, 2000);
         return;
     }
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showConfirmButton: false
             });
             setTimeout(() => {
-                window.location.href = './auth/admin/login.html';
+                window.location.href = '../auth/admin/login.html';
             }, 2000);
         }
     } catch (error) {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             showConfirmButton: false
         });
         setTimeout(() => {
-            window.location.href = './auth/admin/login.html';
+            window.location.href = '../auth/admin/login.html';
         }, 2000);
     }
 });
