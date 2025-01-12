@@ -11,11 +11,15 @@ function loadFormData() {
   if (savedData) {
     const formData = JSON.parse(savedData);
     document.getElementById("username").value = formData.username || "";
-    document.getElementById("password").value = formData.password || "";
     document.getElementById("phone_number").value = formData.phone_number || "";
     document.getElementById("email").value = formData.email || "";
     document.getElementById("store_name").value = formData.store_name || "";
     document.getElementById("address").value = formData.address || "";
+
+    // Dekripsi password sebelum mengisi field password
+    if (formData.password) {
+      document.getElementById("password").value = atob(formData.password);
+    }
   }
 }
 
@@ -23,7 +27,7 @@ function loadFormData() {
 function saveFormData() {
   const formData = {
     username: document.getElementById("username").value,
-    password: document.getElementById("password").value,
+    password: btoa(document.getElementById("password").value), // Enkripsi password
     phone_number: document.getElementById("phone_number").value,
     email: document.getElementById("email").value,
     store_name: document.getElementById("store_name").value,
