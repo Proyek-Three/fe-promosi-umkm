@@ -1,46 +1,54 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-  
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Mencegah reload halaman setelah submit
-  
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-  
-      // Tentukan base URL backend
-      const baseURL = window.location.hostname === "localhost" 
-        ? "http://127.0.0.1:8080" 
-        : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com";
-  
-      try {
-        // Kirim permintaan POST ke backend
-        const response = await fetch(`${baseURL}/admin/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js";
+import {addCSS} from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
+
+addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
+
+async function login(username, password) {
+    try {
+        const response = await fetch('https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ User_name: username, Password: password })
         });
-  
-        if (!response.ok) {
-          // Jika respons tidak berhasil (status selain 200-299)
-          const errorData = await response.json();
-          alert(`Error: ${errorData.error}`);
-          return;
-        }
-  
+
         const data = await response.json();
-  
-        // Tampilkan pesan sukses jika login berhasil
-        alert(data.message);
-  
-        // Redirect atau lakukan tindakan lain setelah login berhasil
-        window.location.href = "../../Admin/dashboard.html";
-        // Contoh: window.location.href = "/dashboard";
-      } catch (error) {
-        console.error("Error during login:", error);
-        alert("An error occurred. Please try again later.");
-      }
-    });
-  });
-  
+
+        if (response.status === 200) {
+            localStorage.setItem('token', data.token);
+            Swal.fire({
+                icon: "success",
+                title: "Login Successful",
+                text: "You will be directed to dashboard",
+                timer: 2000,
+                showConfirmButton: false
+              });
+              setTimeout(() => {
+                window.location.href = 'Admin/dashboardadmin.html';
+              }, 2000);
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Login Failed",
+                text: "Username atau password salah!",
+                
+            });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: "warning",
+            title: "Login Failed",
+            text: console.error(error)
+        });
+    }
+}
+
+
+document.getElementById('form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    login(username, password);
+});
