@@ -280,29 +280,28 @@
                 @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
                 <i class="fa-solid fa-user"></i>
               </button>
-              <template x-if="isProfileMenuOpen">
-                <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-                  x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu"
+              <ul x-show="isProfileMenuOpen" 
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100"
+                  x-transition:leave-end="opacity-0"
+                  @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu"
                   class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                   aria-label="submenu">
-                  <li class="flex">
-                    <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                      href="#">
-                      <span><i class="fa-regular fa-user"></i> Profile</span>
-                    </a>
-                  </li>
-
-                  <li class="flex">
-                    <a id="logoutButton" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                      href="#">
-                      <span><i class="fa-solid fa-right-from-bracket"></i>
-                        Logout</span>
-                    </a>
+                <li class="flex">
+                  <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                    href="#">
+                    <span><i class="fa-regular fa-user"></i> Profile</span>
+                  </a>
                 </li>
-                
-                </ul>
-              </template>
+                <li class="flex">
+                  <a id="logoutButton" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                    href="#">
+                    <span><i class="fa-solid fa-right-from-bracket"></i> Logout</span>
+                  </a>
+                </li>
+              </ul>
             </li>
+            
           </ul>
           <!-- THEME END -->
 
@@ -457,6 +456,6 @@
 <script src="../assets/js/charts-lines.js" defer></script>
 <script src="../assets/js/charts-pie.js" defer></script>
 <script type="module" src="../assets/js/controller/dashboard.js"></script>
-<script src="../assets/js/adminlogout.js" defer></script>
+<script type="module" src="/assets/js/adminlogout.js" defer></script>
 
 </html>
