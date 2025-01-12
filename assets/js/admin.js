@@ -25,7 +25,7 @@ async function login(username, password) {
                 showConfirmButton: false
               });
               setTimeout(() => {
-                window.location.href = 'dashboardadmin.html';
+                window.location.href = '../Admin/dashboardadmin.html';
               }, 2000);
         } else {
             Swal.fire({
