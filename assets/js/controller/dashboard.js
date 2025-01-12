@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/dashboardadmin', {
+        const response = await fetch('https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/dashboard', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
