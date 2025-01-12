@@ -8,7 +8,7 @@ async function logout() {
 
   if (!token) {
     alert("You are not logged in");
-    window.location.href = "../../auth/admin/login.html";
+    window.location.href = "../auth/admin/login.html";
     return;
   }
 
@@ -39,7 +39,7 @@ async function logout() {
         showConfirmButton: false,
       });
       setTimeout(() => {
-        window.location.href = "../../auth/admin/login.html";
+        window.location.href = "../auth/admin/login.html";
       }, 2000);
     } else {
       Swal.fire({
