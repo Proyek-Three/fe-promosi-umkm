@@ -353,7 +353,6 @@
               Edit Product Status
             </h2>
 
-            <div>
               <label class="block mt-4 text-sm" for="status">
                 <span class="text-gray-700 dark:text-gray-400"> Status </span>
                 <select
@@ -365,7 +364,6 @@
                   <option value="" disabled selected>Select Status</option>
                 </select>
               </label>
-            </div>
             <script>
               // Select Category
               // Ambil elemen <select>
@@ -390,11 +388,11 @@
                   statuses.forEach((status) => {
                     const option = document.createElement("option");
                     option.value = status.id; // Gunakan id sebagai nilai
-                    option.textContent = status.status; // Tampilkan nama kategori
+                    option.textContent = status.status; // Tampilkan nama status
                     statusSelect.appendChild(option);
                   });
                 } catch (error) {
-                  console.error("Gagal mengambil data kategori:", error);
+                  console.error("Gagal mengambil data status:", error);
                 }
               }
 
