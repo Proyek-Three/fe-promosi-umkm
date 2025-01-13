@@ -17,6 +17,7 @@ function isiRow(value) {
             .replace("#PRICE#", value.price)
             .replace("#IMAGE#", value.image)
             .replace("#STATUS#", value.status.status)
+            .replace("#IDEDIT#", value.id)    
             .replace("#IDHAPUS#", value.id)    
     addInner("iniTabel", content);
 }
