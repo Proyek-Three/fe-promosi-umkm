@@ -6,7 +6,7 @@ export function isiData(results) {
         { id: 'description', path: 'description' },
         { id: 'price', path: 'price' },
         { id: 'image', path: 'image' },
-        { id: 'status', path: 'status.status' },
+        { id: 'status', path: 'status' },
     ];
   
     inputMapping.forEach(({ id, path, index, property }) => {
