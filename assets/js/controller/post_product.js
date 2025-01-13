@@ -11,6 +11,9 @@ function pushData() {
     category: {
         categoryname: getValue("category_name"),
     },
+    status: {
+      status: getValue("status"),
+    },
     // store: {
     //   storename: getValue("store_name"),
     //   address: getValue("address"),
@@ -25,6 +28,7 @@ function pushData() {
   const category = document.getElementById("category_name");
   const storename = document.getElementById("store_name");
   const address = document.getElementById("address");
+  // const status = document.getElementById("status");
 
   if (productname.value === "") {
     alert("Harap Masukan data produk terlebih dahulu");
@@ -36,6 +40,8 @@ function pushData() {
     alert("Harap Masukan gambar produk terlebih dahulu");
   } else if (category.value === "" || category.value === "Pilih Kategori") {
     alert("Harap memilih kategori produk terlebih dahulu");
+  // } else if (status.value === "" || status.value === "Pilih Status") {
+  //   alert("Harap memilih status terlebih dahulu");
   } else if (storename.value === "") {
     alert("Harap Masukan nama toko terlebih dahulu");
   } else if (address.value === "") {
