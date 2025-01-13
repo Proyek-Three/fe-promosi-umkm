@@ -9,12 +9,17 @@ export function GetAllProduct(results) {
     results.forEach(isiRow);
 }
 
+function formatCurrency(amount) {
+    // Convert amount to number and format with thousands separators and "Rp."
+    return `Rp. ${parseFloat(amount).toLocaleString('id-ID')}`;
+  }
+
 function isiRow(value) {
     let content =
         isiTabel.replace("#PRODUCTNAME#", value.product_name)
             .replace("#CATEGORYNAME#", value.category.category_name)
             .replace("#DESCRIPTION#", value.description)
-            .replace("#PRICE#", value.price)
+            .replace("#PRICE#", formatCurrency(value.price) || "Rp. 0,00")
             .replace("#IMAGE#", value.image)
             .replace("#STATUS#", value.status.status)
             .replace("#IDEDIT#", value.id)    
