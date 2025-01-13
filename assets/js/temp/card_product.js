@@ -24,7 +24,7 @@ export let isiCard =
                  <div class="mt-2">
                   <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Status:</span>
                   <div class="inline-flex items-center gap-2 bg-blue-100 text-dark-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-dark-900 dark:text-dark-300">
-                    Accepted
+                    #STATUS#
                   </div>
                 </div>
               <div class="flex items-center justify-between">

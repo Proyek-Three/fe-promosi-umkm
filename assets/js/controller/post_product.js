@@ -26,9 +26,9 @@ function pushData() {
   const description = document.getElementById("description");
   const image = document.getElementById("image");
   const category = document.getElementById("category_name");
-  const storename = document.getElementById("store_name");
-  const address = document.getElementById("address");
-  // const status = document.getElementById("status");
+  // const storename = document.getElementById("store_name");
+  // const address = document.getElementById("address");
+  const status = document.getElementById("status");
 
   if (productname.value === "") {
     alert("Harap Masukan data produk terlebih dahulu");
