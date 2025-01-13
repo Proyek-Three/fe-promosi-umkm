@@ -353,19 +353,21 @@
               Edit Product Status
             </h2>
 
-            <label class="block mt-4 text-sm">
+            <label class="block mt-4 text-sm" for="status">
               <span class="text-gray-700 dark:text-gray-400"> Status </span>
               <select
                 id="status"
                 name="status"
                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                required
               >
-                <option disabled selected>Select Status</option>
+                <option value="" disabled selected>Select Status</option>
               </select>
             </label>
 
             <div>
-              <button onclick="return window.location.href= 'index.html'"
+              <button
+                onclick="return window.location.href= 'index.html'"
                 class="px-4 mt-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >
                 Back
@@ -382,5 +384,9 @@
         <!-- CONTENT END  -->
       </div>
     </div>
+
+    <script type="module" src="js/fetch_edit.js"></script>
+    <script type="module" src="../../assets/js/config/url_put_product.js"></script>
+    <script type="module" src="../../assets/js/controller/put_product.js"></script>
   </body>
 </html>
