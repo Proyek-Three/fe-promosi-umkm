@@ -4,16 +4,16 @@ export let isiTabel =
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
                     <tr class="text-gray-700 dark:text-gray-400">
+                    <td class="px-4 py-3">
+                      <img
+                        src="#IMAGE#"
+                        class="w-20 h-20 object-cover rounded-lg"
+                      />
+                    </td>
                       <td class="px-4 py-3 text-sm">#PRODUCTNAME#</td>
                       <td class="px-4 py-3 text-sm">#CATEGORYNAME#</td>
                       <td class="px-4 py-3 text-sm">#DESCRIPTION#</td>
                       <td class="px-4 py-3 text-sm">#PRICE#</td>
-                      <td class="px-4 py-3">
-                        <img
-                          src="#IMAGE#"
-                          class="w-20 h-20 object-cover rounded-lg"
-                        />
-                      </td>
                       <td class="px-4 py-3 text-sm">#STATUS#</td>
                       <td class="px-4 py-3 text-center">
                         <div class="flex items-center justify-center space-x-4">
