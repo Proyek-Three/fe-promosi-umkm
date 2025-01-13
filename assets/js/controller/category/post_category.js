@@ -1,6 +1,6 @@
 import { postData } from "https://bukulapak.github.io/api/process.js";
 import { onClick, getValue } from "https://bukulapak.github.io/element/process.js";
-import { urlPOST, AmbilResponse } from "../config/url_post_category.js";
+import { urlPOST, AmbilResponse } from "../../config/category/url_post_category.js";
 
 function pushData() {
   let data = {
