@@ -353,6 +353,7 @@
               Edit Product Status
             </h2>
 
+            <div>
             <label class="block mt-4 text-sm" for="status">
               <span class="text-gray-700 dark:text-gray-400"> Status </span>
               <select
@@ -364,7 +365,42 @@
                 <option value="" disabled selected>Select Status</option>
               </select>
             </label>
-
+            </div>
+            <script>
+              // Select Category
+              // Ambil elemen <select>
+              const statusSelect = document.getElementById("status");
+  
+              // Fungsi untuk mendapatkan data dari API
+              async function fetchStatus() {
+                try {
+                  const response = await fetch(
+                    "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/statuses"
+                  );
+  
+                  // Periksa apakah response berhasil
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+  
+                  // Parse data JSON
+                  const statuses = await response.json();
+  
+                  // Tambahkan opsi ke elemen <select>
+                    statuses.forEach((status) => {
+                    const option = document.createElement("option");
+                    option.value = status.id; // Gunakan id sebagai nilai
+                    option.textContent = status.status; // Tampilkan nama kategori
+                    statusSelect.appendChild(option);
+                  });
+                } catch (error) {
+                  console.error("Gagal mengambil data kategori:", error);
+                }
+              }
+  
+              // Panggil fungsi untuk fetch data
+              fetchStatus();
+            </script>
             <div>
               <button
                 onclick="return window.location.href= 'index.html'"
