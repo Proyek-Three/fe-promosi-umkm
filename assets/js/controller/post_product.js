@@ -9,15 +9,11 @@ function pushData() {
     description: getValue("description"),
     image: getValue("image"),
     category: {
-        categoryname: getValue("category_name"),
+        category_name: getValue("category_name"),
     },
     status: {
       status: getValue("status"),
     },
-    // store: {
-    //   storename: getValue("store_name"),
-    //   address: getValue("address"),
-    // },
   };
 
   console.log(data);
@@ -26,8 +22,6 @@ function pushData() {
   const description = document.getElementById("description");
   const image = document.getElementById("image");
   const category = document.getElementById("category_name");
-  // const storename = document.getElementById("store_name");
-  // const address = document.getElementById("address");
   const status = document.getElementById("status");
 
   if (productname.value === "") {
@@ -40,8 +34,8 @@ function pushData() {
     alert("Harap Masukan gambar produk terlebih dahulu");
   } else if (category.value === "" || category.value === "Pilih Kategori") {
     alert("Harap memilih kategori produk terlebih dahulu");
-  // } else if (status.value === "" || status.value === "Pilih Status") {
-  //   alert("Harap memilih status terlebih dahulu");
+  } else if (status.value === "" || status.value === "Pilih Status") {
+    alert("Harap memilih status terlebih dahulu");
   } else if (storename.value === "") {
     alert("Harap Masukan nama toko terlebih dahulu");
   } else if (address.value === "") {

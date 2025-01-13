@@ -9,15 +9,11 @@ function pushData() {
     description: getValue("description"),
     image: getValue("image"),
     category: {
-        categoryname: getValue("category_name"),
+        category_name: getValue("category_name"),
     },
     status: {
       status: getValue("status"),
     },
-    // store: {
-    //   storename: getValue("store_name"),
-    //   address: getValue("address"),
-    // },
   };
 
   console.log(data);
@@ -27,8 +23,6 @@ function pushData() {
   const image = document.getElementById("image");
   const category = document.getElementById("category_name");
   const status = document.getElementById("status");
-  // const storename = document.getElementById("store_name");
-  // const address = document.getElementById("address");
 
   if (productname.value === "") {
     alert("Harap Masukan data produk terlebih dahulu");
