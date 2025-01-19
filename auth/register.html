@@ -25,87 +25,144 @@
     </style>
   </head>
   <body>
-    <div class="font-[sans-serif] bg-white md:h-screen">
-      <div class="grid md:grid-cols-2 items-center gap-8 h-full">
-        <div class="max-md:order-1 p-4 bg-gray-50 h-full">
-          <img
-            src="https://readymadeui.com/signin-image.webp"
-            class="lg:max-w-[90%] w-full h-full object-contain block mx-auto"
-            alt="login-image"
-          />
-        </div>
-
-        <div class="flex items-center p-6 h-full w-full">
-          <form id="registerForm" class="max-w-lg w-full mx-auto">
-            <div class="mb-12">
-              <h3
-                class="text-blue-500 md:text-3xl text-2xl font-extrabold max-md:text-center"
-              >
-                Register
-              </h3>
-            </div>
-
-            <div>
-              <label class="text-gray-800 text-xs block mb-2">Username</label>
-              <div class="relative flex items-center">
-                <i class="fa-solid fa-user"></i>
+    
+    <section class="bg-white dark:bg-gray-900">
+      <div class="flex justify-center min-h-screen overflow-y-auto">
+        <div
+          class="hidden bg-cover lg:block lg:w-2/5"
+          style="
+            background-image: url('https://readymadeui.com/signin-image.webp');
+          "
+        ></div>
+    
+        <div
+          class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5"
+        >
+          <div class="w-full">
+            <h1
+              class="text-3xl font-semibold font-bold tracking-wider text-gray-800 capitalize dark:text-white"
+            >
+              Register
+            </h1>
+    
+            <p class="mt-4 text-gray-500 dark:text-gray-400">
+              This registration is only for sellers who have MSME businesses.
+              Make sure you have a product or service that you want to promote
+              through this platform.
+            </p>
+    
+            <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+              <h1 class="text-2xl">Account Information</h1>
+              <p></p>
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Full Name</label
+                >
                 <input
+                  type="text"
                   name="name"
-                  type="text"
-                  required
-                  class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
-                  placeholder="Enter username"
+                  id="name"
+                  placeholder="Enter full name"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
-            </div>
-            <div class="mt-6">
-              <label class="text-gray-800 text-xs block mb-2">Email</label>
-              <div class="relative flex items-center">
-                <i class="fa-solid fa-envelope"></i>
+    
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Phone Number</label
+                >
                 <input
+                  type="text"
+                  name="phone_number"
+                  id="phone_number"
+                  placeholder="Enter phone number"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
+    
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
                   name="email"
-                  type="text"
-                  required
-                  class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
-                  placeholder="Enter email"
+                  id="email"
+                  placeholder="johnsnow@example.com"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
-            </div>
-            <div class="mt-6">
-              <label class="text-gray-800 text-xs block mb-2">Password</label>
-              <div class="relative flex items-center">
-                <i class="fa-solid fa-lock"></i>
+    
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Username</label
+                >
                 <input
-                  name="password"
-                  type="password"
-                  required
-                  class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
-                  placeholder="Enter password"
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Enter username"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
-            </div>
-
-            <div class="mt-7">
+    
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
+              <br />
+              <h1 class="text-2xl">Store Information</h1>
+              <p></p>
+    
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Store Name</label
+                >
+                <input
+                  type="text"
+                  name="store_name"
+                  id="store_name"
+                  placeholder="Enter store name"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
+              <div>
+                <label
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                  >Address Store</label
+                >
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  placeholder="Enter store address"
+                  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
               <button
                 type="button"
-                id="registerButton"
-                class="w-full py-3 px-6 text-sm tracking-wider font-semibold rounded-md bg-blue-600 hover:bg-blue-700 text-white focus:outline-none"
+                class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
               >
-                Create an account
+                Register
               </button>
-              <p class="text-sm mt-6 text-gray-800">
-                Already have an account?
-                <a
-                  href="login.html"
-                  class="text-blue-500 font-semibold hover:underline ml-1"
-                  >Login here</a
-                >
-              </p>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+    
     <script src="../assets/js/fetch.js"></script>
   </body>
 </html>
