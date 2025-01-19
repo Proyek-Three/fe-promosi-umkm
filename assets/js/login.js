@@ -5,7 +5,6 @@ document.getElementById("loginButton").addEventListener("click", async function 
     // Ambil data dari form
     const data = {
         username: formData.get("username"),
-        email: formData.get("email"),
         password: formData.get("password"),
     };
 
@@ -13,7 +12,7 @@ document.getElementById("loginButton").addEventListener("click", async function 
         // Tentukan URL backend secara dinamis
         const isLocalhost = window.location.origin === "http://127.0.0.1:8080";
         const BACKEND_URL = isLocalhost
-            ? "http://127.0.0.1:8080/login" // URL untuk backend lokal
+            ? "http://127.0.0.1:8080/users/login" // URL untuk backend lokal
             : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/login"; // URL untuk backend Heroku
 
         // Kirim data ke server
@@ -29,12 +28,11 @@ document.getElementById("loginButton").addEventListener("click", async function 
             // Ambil respon dari server
             const result = await response.json();
 
-            // Simpan token di localStorage untuk autentikasi
-            localStorage.setItem("token", result.token);
+            console.log(result);
             
-            // Simpan data user selain password di localStorage (untuk autofill)
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("email", data.email);
+
+            // Simpan token di cookie
+            document.cookie = `token=${result.token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};`;
 
             // Tampilkan pesan sukses dengan SweetAlert
             Swal.fire({
@@ -43,8 +41,19 @@ document.getElementById("loginButton").addEventListener("click", async function 
                 icon: "success",
                 confirmButtonText: "Lanjutkan",
             }).then(() => {
-                // Redirect ke halaman utama/index
-                window.location.href = "../Users/dashboard.html";
+                // Arahkan berdasarkan role
+                if (result.data.role === "seller") {
+                    window.location.href = "../Users/dashboard.html";
+                } else if (result.data.role === "admin") {
+                    window.location.href = "../../Admin/dashboardadmin.html";
+                } else {
+                    Swal.fire({
+                        title: "Peran Tidak Dikenali",
+                        text: "Silakan hubungi administrator.",
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                    });
+                }
             });
         } else {
             const error = await response.json();
@@ -66,4 +75,4 @@ document.getElementById("loginButton").addEventListener("click", async function 
             confirmButtonText: "Coba Lagi",
         });
     }
-}); 
+});

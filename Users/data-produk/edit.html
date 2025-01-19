@@ -47,12 +47,12 @@
           Product Data
         </a>
         <a
-        href="../profile/index.html"
-        class="flex items-center text-white py-4 pl-6 nav-item"
-      >
-      <i class="fa-solid fa-user mr-3"></i>
-        Profile
-      </a>
+          href="../profile/index.html"
+          class="flex items-center text-white py-4 pl-6 nav-item"
+        >
+          <i class="fa-solid fa-user mr-3"></i>
+          Profile
+        </a>
       </nav>
     </aside>
 
@@ -147,8 +147,6 @@
           Edit Product Data
         </h2>
         <form
-          action="#"
-          method="POST"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -188,19 +186,20 @@
               />
             </div>
 
-             <!-- Input Upload File -->
-             <div>
-                <label
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  for="file_input"
-                  >Upload file</label
-                >
-                <input
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                  id="file_input"
-                  type="file"
-                />
-              </div>
+            <!-- Input Upload File -->
+            <div>
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                for="file_input"
+                >Upload file</label
+              >
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                id="image"
+                name="image"
+                type="file"
+              />
+            </div>
 
             <!-- Input Kategori Produk -->
             <div>
@@ -241,7 +240,8 @@
 
           <!-- Tombol Submit -->
           <button
-            type="submit" onclick="return window.location.href= 'index.html'"
+            type="submit"
+            onclick="return window.location.href= 'index.html'"
             class="mt-6 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-3 text-center dark:bg-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
           >
             Back
@@ -258,6 +258,16 @@
       <!-- CONTENT END -->
     </div>
 
+    <!-- Fetch -->
+    <script type="module" src="../../assets/js/fetch_edit_product.js"></script>
+    <script
+      type="module"
+      src="../../assets/js/config/url_put_product.js"
+    ></script>
+    <script
+      type="module"
+      src="../../assets/js/controller/put_product.js"
+    ></script>
     <!-- AlpineJS -->
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"

@@ -3,26 +3,34 @@ import {addCSS} from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
 
 addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
 
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
+   
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
-    if (!token) {
-        Swal.fire({
-            icon: "warning",
-            title: "Can't Access Dashboard",
-            text: "You need to login before accessing dashboard!",
-            timer: 2000,
-            customClass: {
-                container: 'backdrop-blur-md',
-            },
-            showConfirmButton: false
-          });
-          setTimeout(() => {
-            window.location.href = '../auth/admin/login.html';
-          }, 2000);
-        return;
-    }
+const token = getCookie('token');
+console.log(token);
 
+if (!token) {
+  Swal.fire({
+    icon: "warning",
+    title: "Can't Access Dashboard",
+    text: "You need to login before accessing dashboard!",
+    timer: 2000,
+    customClass: {
+      container: 'backdrop-blur-md',
+    },
+    showConfirmButton: false
+  });
+  setTimeout(() => {
+    window.location.href = '../auth/login.html';
+  }, 2000);
+}
     try {
         const response = await fetch('https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/dashboard', {
             method: 'GET',

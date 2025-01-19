@@ -2,7 +2,7 @@ export function isiData(results) {
 
     const inputMapping = [
         { id: 'product_name', path: 'product_name' },
-        { id: 'category', path: 'category.category_name' },
+        { id: 'category ', path: 'category_name' },
         { id: 'description', path: 'description' },
         { id: 'price', path: 'price' },
         { id: 'image', path: 'image' },
