@@ -1,7 +1,11 @@
 const isLocalhost = window.location.origin.includes("127.0.0.1");
 const PROFILE_URL = isLocalhost
-  ? "http://127.0.0.1:8080/users/profile" // Sesuaikan endpoint profile
+  ? "http://127.0.0.1:8080/users/profile" // Endpoint untuk mendapatkan profil
   : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/profile";
+
+const UPDATE_PROFILE_URL = isLocalhost
+  ? "http://127.0.0.1:8080/update/users/profile" // Endpoint untuk update profil
+  : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/users/profile";
 
 // Fungsi untuk mendapatkan token autentikasi dari cookie
 function getToken() {
@@ -55,5 +59,58 @@ async function loadProfileData() {
   }
 }
 
+// Fungsi untuk mengirim data yang diubah ke backend
+async function editProfile(event) {
+  event.preventDefault(); // Mencegah form reload halaman
+
+  const token = getToken();
+  if (!token) {
+    alert("You are not authenticated. Please login first.");
+    window.location.href = "../../auth/login.html";
+    return;
+  }
+
+  // Ambil data dari form
+  const updatedData = {
+    username: document.getElementById("username").value,
+    phone_number: document.getElementById("phone_number").value,
+    email: document.getElementById("email").value,
+    store: {
+      store_name: document.getElementById("store_name").value,
+      address: document.getElementById("address").value,
+    },
+  };
+
+  try {
+    const response = await fetch(UPDATE_PROFILE_URL, {
+      method: "PUT", // Gunakan metode PUT untuk update data
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Sertakan token di Authorization header
+      },
+      body: JSON.stringify(updatedData), // Kirim data sebagai JSON
+    });
+
+    if (response.ok) {
+      const updatedProfile = await response.json();
+      console.log("Profile updated successfully:", updatedProfile);
+
+      // Tampilkan pesan sukses dan kembali ke dashboard admin
+      alert("Profile updated successfully!");
+      window.location.href = "../../admin/dashboard.html"; // Sesuaikan rute dashboard admin Anda
+    } else {
+      const errorResponse = await response.json();
+      console.error("Failed to update profile:", errorResponse.message);
+      alert(`Failed to update profile: ${errorResponse.message}`);
+    }
+  } catch (error) {
+    console.error("Error updating profile data:", error);
+    alert("An error occurred while updating profile data.");
+  }
+}
+
 // Panggil fungsi loadProfileData saat halaman dimuat
 document.addEventListener("DOMContentLoaded", loadProfileData);
+
+// Tambahkan event listener pada tombol Edit Data
+document.getElementById("userForm").addEventListener("submit", editProfile);
