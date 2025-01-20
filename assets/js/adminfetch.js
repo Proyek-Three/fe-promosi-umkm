@@ -23,10 +23,13 @@ async function fetchUsers() {
             tr.classList.add("text-gray-700", "dark:text-gray-400");
 
             tr.innerHTML = `
+                <td class="px-4 py-3 text-sm"></td>
+                <td class="px-4 py-3 text-sm"></td>
                 <td class="px-4 py-3 text-sm">${user.username}</td>
                 <td class="px-4 py-3 text-sm">${user.phone_number}</td>
                 <td class="px-4 py-3 text-sm">${user.email}</td>
                 <td class="px-4 py-3 text-sm">${user.store.store_name}</td>
+                <td class="px-4 py-3 text-sm"></td>
                 <td class="px-4 py-3">
                     <div class="flex items-center space-x-4 text-sm">
                         <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">

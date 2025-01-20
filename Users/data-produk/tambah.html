@@ -147,7 +147,7 @@
           Add Product Data
         </h2>
         <form
-          action="#"
+         
           method="POST"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
         >
@@ -162,8 +162,8 @@
               </label>
               <input
                 type="text"
-                id="product_name"
-                name="product_name"
+                id="ProductName"
+                name="ProductName"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Product Name"
                 required
@@ -206,14 +206,14 @@
             <!-- Input Kategori Produk -->
             <div>
               <label
-                for="category_name"
+                for="category_id"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Category
               </label>
               <select
-                id="category_name"
-                name="category_name"
+                id="category_id"
+                name="category_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 required
               >
@@ -224,7 +224,7 @@
           <script>
             // Select Category
             // Ambil elemen <select>
-            const categorySelect = document.getElementById("category_name");
+            const categorySelect = document.getElementById("category_id");
 
             // Fungsi untuk mendapatkan data dari API
             async function fetchCategories() {
