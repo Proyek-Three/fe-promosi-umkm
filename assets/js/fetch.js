@@ -2,20 +2,22 @@ document.getElementById("registerButton").addEventListener("click", async functi
   const form = document.getElementById("registerForm");
   const formData = new FormData(form);
 
+  // Siapkan data untuk dikirim
   const data = {
-    username: formData.get("name"),
-    email: formData.get("email"),
+    name: formData.get("name"),
+    username: formData.get("username"),
     password: formData.get("password"),
+    email: formData.get("email"),
+    phone_number: formData.get("phoneNumber"), // Perhatikan penamaan key sesuai backend
+    store: {
+      store_name: formData.get("storeName"),
+      address: formData.get("storeAddress"),
+    },
   };
 
   try {
-    // Tentukan URL backend
-    const isLocalhost = window.location.origin === "http://127.0.0.1:8080";
-    const BACKEND_URL = isLocalhost
-      ? "http://127.0.0.1:8080/register"
-      : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/register";
-
-    const response = await fetch(BACKEND_URL, {
+    // Kirim request ke backend
+    const response = await fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,14 +27,14 @@ document.getElementById("registerButton").addEventListener("click", async functi
 
     if (response.ok) {
       const result = await response.json();
-      alert(result.message);
-      window.location.href = "login.html";
+      alert("Registration successful: " + result.message);
+      window.location.href = "login.html"; // Redirect jika berhasil
     } else {
       const error = await response.json();
-      alert(`Error: ${error.message}`);
+      alert("Error: " + error.message); // Tampilkan error dari backend
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("An error occurred while registering.");
+    alert("An unexpected error occurred while registering.");
   }
 });
