@@ -1,4 +1,3 @@
-// Tentukan URL backend secara dinamis
 const isLocalhost = window.location.origin.includes("127.0.0.1");
 const PROFILE_URL = isLocalhost
   ? "http://127.0.0.1:8080/users/profile" // Sesuaikan endpoint profile
@@ -18,7 +17,7 @@ async function loadProfileData() {
     const token = getToken();
     if (!token) {
       alert("You are not authenticated. Please login first.");
-      window.location.href = "/login.html";
+      window.location.href = "../../auth/login.html";
       return;
     }
 
@@ -26,7 +25,7 @@ async function loadProfileData() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`, // Sertakan token di Authorization header
       },
     });
 
@@ -34,14 +33,17 @@ async function loadProfileData() {
       const userProfile = await response.json();
       console.log("Profile data loaded:", userProfile);
 
-      document.getElementById("username").value = userProfile.username || "";
+      // Isi form dengan data pengguna
+      document.getElementById("username").value =
+        userProfile.data.username || "";
       document.getElementById("phone_number").value =
-        userProfile.phone_number || "";
-      document.getElementById("email").value = userProfile.email || "";
+        userProfile.data.phone_number || "";
+      document.getElementById("email").value = userProfile.data.email || "";
       document.getElementById("store_name").value =
-        userProfile.store?.store_name || "";
+        userProfile.data.store?.store_name || "";
       document.getElementById("address").value =
-        userProfile.store?.address || "";
+        userProfile.data.store?.address || "";
+
     } else {
       const errorResponse = await response.json();
       console.error("Failed to load profile:", errorResponse.message);
@@ -52,7 +54,6 @@ async function loadProfileData() {
     alert("An error occurred while loading profile data.");
   }
 }
-
 
 // Panggil fungsi loadProfileData saat halaman dimuat
 document.addEventListener("DOMContentLoaded", loadProfileData);
