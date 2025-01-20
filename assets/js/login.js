@@ -29,7 +29,6 @@ document.getElementById("loginButton").addEventListener("click", async function 
             const result = await response.json();
 
             console.log(result);
-            
 
             // Simpan token di cookie
             document.cookie = `token=${result.token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};`;
@@ -43,8 +42,12 @@ document.getElementById("loginButton").addEventListener("click", async function 
             }).then(() => {
                 // Arahkan berdasarkan role
                 if (result.data.role === "seller") {
+                    // Simpan data user di LocalStorage untuk digunakan nanti
+                    localStorage.setItem("userData", JSON.stringify(result.data));
                     window.location.href = "../Users/dashboard.html";
                 } else if (result.data.role === "admin") {
+                    // Simpan data admin di LocalStorage
+                    localStorage.setItem("adminData", JSON.stringify(result.data));
                     window.location.href = "../../Admin/dashboardadmin.html";
                 } else {
                     Swal.fire({
