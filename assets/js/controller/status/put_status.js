@@ -42,66 +42,34 @@ async function fetchProductData() {
     }
 }
 
-// Fungsi untuk memperbarui status produk
-async function updateProductStatus() {
-    const status = document.getElementById('status').value;
-    const productId = new URLSearchParams(window.location.search).get('productId');
-
-    if (!status) {
-        alert('Harap pilih status.');
-        return;
-    }
-
-    if (!productId) {
-        alert('Product ID tidak ditemukan.');
-        return;
-    }
-
-    const token = getCookie('token'); // Menggunakan cookie 'token'
-    if (!token) {
-        alert('Tidak terautentikasi. Silakan login terlebih dahulu.');
-        return;
-    }
-
+async function updateProductStatus(productId, product, newStatus, token) {
     try {
-        // Ambil status yang baru dipilih dari dropdown
-        const response = await fetch(`${baseURL}/product/${productId}`);
-        if (!response.ok) {
-            const errorText = await response.text(); // Dapatkan teks error dari respons
-            throw new Error(`Gagal mengambil data produk. Error: ${errorText}`);
-        }
+        // Siapkan data yang akan dikirim
+        const dataToSend = {
+            status: {
+                _id: product.status._id, // Ambil ID status dari produk
+                status: newStatus        // Ubah status menjadi "Accepted" atau "Rejected"
+            },
+            categoryId: product.category._id // Ambil ID kategori dari produk
+        };
 
-        const product = await response.json(); // Ambil data produk
-        console.log('Fetched Product Data:', product); // Debug data produk
+        console.log("Data yang dikirim ke API:", JSON.stringify(dataToSend, null, 2)); // Debug log
 
-        // Pastikan kategori ID ada dalam data produk
-        const categoryId = product.categoryId || product.category?.id || product.category?._id; // Perbaikan
-        console.log('Kategori:', product.category); // Debug kategori
-        console.log('Kategori ID:', categoryId); // Debug kategori ID
-
-        if (!categoryId) {
-            throw new Error("Kategori ID tidak ditemukan pada produk.");
-        }
-
-        // Update status produk dengan kategori ID
-        const responseUpdate = await fetch(`${baseURL}/update/product/${productId}`, {
+        // Kirim request ke backend
+        const responseUpdate = await fetch(`https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/product/${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
-                status: {
-                    _id: product.status._id, // Menggunakan _id status yang lama dari data produk
-                    status: status // Status baru yang dipilih dari dropdown
-                },
-                categoryId: categoryId // Menambahkan kategori ID
-            }),
+            body: JSON.stringify(dataToSend),
         });
 
+        // Tangani error
         if (!responseUpdate.ok) {
-            const errorText = await responseUpdate.text(); // Dapatkan pesan error dari server
-            throw new Error(`Gagal memperbarui status produk. Error: ${errorText}`);
+            const errorResponse = await responseUpdate.json(); // Dapatkan detail error dari API
+            console.error("Error detail dari API:", errorResponse);
+            throw new Error(`Gagal memperbarui status produk. Error: ${JSON.stringify(errorResponse)}`);
         }
 
         const updatedProduct = await responseUpdate.json();
@@ -112,6 +80,7 @@ async function updateProductStatus() {
         alert(`Terjadi kesalahan saat memperbarui status produk: ${error.message}`);
     }
 }
+
 
 // Panggil fungsi fetchProductData saat halaman dimuat untuk mengisi dropdown
 fetchProductData();
