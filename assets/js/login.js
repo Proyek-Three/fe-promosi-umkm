@@ -48,7 +48,7 @@ document.getElementById("loginButton").addEventListener("click", async function 
                 } else if (result.data.role === "admin") {
                     // Simpan data admin di LocalStorage
                     localStorage.setItem("adminData", JSON.stringify(result.data));
-                    window.location.href = "../../Admin/dashboardadmin.html";
+                    window.location.href = "../Admin/dashboardadmin.html";
                 } else {
                     Swal.fire({
                         title: "Peran Tidak Dikenali",
