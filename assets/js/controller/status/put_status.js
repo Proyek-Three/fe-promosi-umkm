@@ -22,18 +22,23 @@ async function fetchProductData() {
     try {
         const response = await fetch(`${baseURL}/product/${productId}`);
         if (!response.ok) {
-            throw new Error("Failed to fetch product data");
+            const errorText = await response.text(); // Dapatkan teks error dari respons
+            throw new Error(`Failed to fetch product data. Error: ${errorText}`);
         }
 
         const product = await response.json();
+        console.log('Fetched Product Data:', product); // Debug data produk
+
         const statusSelect = document.getElementById('status');
         if (statusSelect) {
+            // Isi dropdown dengan status yang diterima
             statusSelect.value = product.status === 'accepted' ? 'accepted' : 'rejected';
         } else {
             console.error('Status dropdown not found');
         }
     } catch (error) {
         console.error("Error fetching product data:", error);
+        alert(`Error fetching product data: ${error.message}`);
     }
 }
 
@@ -52,9 +57,7 @@ async function updateProductStatus() {
         return;
     }
 
-    const token = getCookie('token');  // Perbaikan: gunakan nama cookie 'token'
-    console.log('Token:', token);  // Debug untuk memastikan token terbaca
-
+    const token = getCookie('token'); // Gunakan nama cookie 'token'
     if (!token) {
         alert('Unauthorized. Please log in first.');
         return;
@@ -65,13 +68,14 @@ async function updateProductStatus() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`  // Sertakan token di header Authorization
+                'Authorization': `Bearer ${token}` // Sertakan token di header Authorization
             },
-            body: JSON.stringify({ status: status }),
+            body: JSON.stringify({ status: status }), // Kirim status baru
         });
 
         if (!response.ok) {
-            throw new Error("Failed to update product status");
+            const errorText = await response.text(); // Dapatkan teks error dari respons
+            throw new Error(`Failed to update product status. Error: ${errorText}`);
         }
 
         const updatedProduct = await response.json();
@@ -79,6 +83,7 @@ async function updateProductStatus() {
         console.log('Updated Product:', updatedProduct);
     } catch (error) {
         console.error("Error updating product status:", error);
+        alert(`Error updating product status: ${error.message}`);
     }
 }
 
