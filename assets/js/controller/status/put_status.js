@@ -48,18 +48,18 @@ async function updateProductStatus() {
     const productId = new URLSearchParams(window.location.search).get('productId');
 
     if (!status) {
-        alert('Please select a status.');
+        alert('Harap pilih status.');
         return;
     }
 
     if (!productId) {
-        alert('Product ID is missing.');
+        alert('Product ID tidak ditemukan.');
         return;
     }
 
-    const token = getCookie('token'); // Gunakan nama cookie 'token'
+    const token = getCookie('token'); // Menggunakan cookie 'token'
     if (!token) {
-        alert('Unauthorized. Please log in first.');
+        alert('Tidak terautentikasi. Silakan login terlebih dahulu.');
         return;
     }
 
@@ -68,24 +68,30 @@ async function updateProductStatus() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Sertakan token di header Authorization
+                'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ status: status }), // Kirim status baru
+            body: JSON.stringify({
+                status: {
+                    _id: product.status._id, // Menggunakan _id status yang lama
+                    status: status // Status baru yang dipilih dari dropdown
+                }
+            }),
         });
 
         if (!response.ok) {
-            const errorText = await response.text(); // Dapatkan teks error dari respons
-            throw new Error(`Failed to update product status. Error: ${errorText}`);
+            const errorText = await response.text(); // Dapatkan pesan error dari server
+            throw new Error(`Gagal memperbarui status produk. Error: ${errorText}`);
         }
 
         const updatedProduct = await response.json();
-        alert('Product status updated successfully!');
-        console.log('Updated Product:', updatedProduct);
+        alert('Status produk berhasil diperbarui!');
+        console.log('Produk yang diperbarui:', updatedProduct);
     } catch (error) {
-        console.error("Error updating product status:", error);
-        alert(`Error updating product status: ${error.message}`);
+        console.error("Error saat memperbarui status produk:", error);
+        alert(`Terjadi kesalahan saat memperbarui status produk: ${error.message}`);
     }
 }
+
 
 // Panggil fungsi fetchProductData saat halaman dimuat untuk mengisi dropdown
 fetchProductData();
