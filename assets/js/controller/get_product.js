@@ -19,6 +19,7 @@ function isiRow(value) {
         isiTabel.replace("#PRODUCTNAME#", value.product_name)
             .replace("#CATEGORYNAME#", value.category.category_name)
             .replace("#DESCRIPTION#", value.description)
+            .replace("#STORENAME#", value.store_name)
             .replace("#PRICE#", formatCurrency(value.price) || "Rp. 0,00")
             .replace("#IMAGE#", value.image)
             .replace("#STATUS#", value.status.status)
