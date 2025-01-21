@@ -1,15 +1,5 @@
-// Fungsi untuk mengambil cookie berdasarkan nama
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-}
-
-// Base URL untuk API (lokal atau deploy)
-const baseURL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? 'http://127.0.0.1:8080'  // Local API
-    : 'https://bp-promosi-umkm-0fd00e17451e.herokuapp.com';  // Deployed API
+// Variabel global untuk menyimpan data produk
+let product = null;
 
 // Fungsi untuk mengambil data produk dan mengisi dropdown status
 async function fetchProductData() {
@@ -26,13 +16,13 @@ async function fetchProductData() {
             throw new Error(`Failed to fetch product data. Error: ${errorText}`);
         }
 
-        const product = await response.json();
+        product = await response.json(); // Simpan data produk ke variabel global
         console.log('Fetched Product Data:', product); // Debug data produk
 
         const statusSelect = document.getElementById('status');
         if (statusSelect) {
             // Isi dropdown dengan status yang diterima
-            statusSelect.value = product.status === 'accepted' ? 'accepted' : 'rejected';
+            statusSelect.value = product.status.status === 'Accepted' ? 'accepted' : 'rejected';
         } else {
             console.error('Status dropdown not found');
         }
@@ -54,6 +44,11 @@ async function updateProductStatus() {
 
     if (!productId) {
         alert('Product ID tidak ditemukan.');
+        return;
+    }
+
+    if (!product) {
+        alert('Data produk belum dimuat.');
         return;
     }
 
@@ -91,7 +86,6 @@ async function updateProductStatus() {
         alert(`Terjadi kesalahan saat memperbarui status produk: ${error.message}`);
     }
 }
-
 
 // Panggil fungsi fetchProductData saat halaman dimuat untuk mengisi dropdown
 fetchProductData();
