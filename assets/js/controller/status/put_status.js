@@ -16,13 +16,14 @@ async function fetchProductData() {
     const productId = new URLSearchParams(window.location.search).get('productId');
     if (!productId) {
         console.error('Product ID is missing from the URL');
+        alert('Product ID tidak ditemukan di URL.');
         return;
     }
 
     try {
         const response = await fetch(`${baseURL}/product/${productId}`);
         if (!response.ok) {
-            const errorText = await response.text(); // Dapatkan teks error dari respons
+            const errorText = await response.text();
             throw new Error(`Failed to fetch product data. Error: ${errorText}`);
         }
 
@@ -31,8 +32,8 @@ async function fetchProductData() {
 
         const statusSelect = document.getElementById('status');
         if (statusSelect) {
-            // Isi dropdown dengan status yang diterima
-            statusSelect.value = product.status === 'accepted' ? 'accepted' : 'rejected';
+            // Isi dropdown dengan status produk saat ini
+            statusSelect.value = product.status.status === 'Accepted' ? 'accepted' : 'rejected';
         } else {
             console.error('Status dropdown not found');
         }
@@ -42,45 +43,66 @@ async function fetchProductData() {
     }
 }
 
-async function updateProductStatus(productId, product, newStatus, token) {
+// Fungsi untuk memperbarui status produk
+async function updateProductStatus() {
+    const productId = new URLSearchParams(window.location.search).get('productId');
+    const newStatus = document.getElementById('status').value;
+
+    console.log('Selected Status:', newStatus);  // Tambahkan ini untuk memeriksa nilai newStatus
+
+    if (!productId || !newStatus) {
+        alert('Product ID atau status baru tidak ditemukan.');
+        return;
+    }
+
+    // Ambil token dari cookie
+    const token = getCookie('token'); // Pastikan nama cookie token sesuai dengan yang ada
+    if (!token) {
+        alert('Authentication token is missing. Please log in again.');
+        return;
+    }
+
+    // Mapping status yang dipilih dengan ObjectID yang sesuai
+    const statusMapping = {
+        'accepted': '67811f31a6ffe1a1bca38c12',
+        'rejected': '67811f40a6ffe1a1bca38c13'
+    };
+
+    const statusId = statusMapping[newStatus];
+    if (!statusId) {
+        alert('Invalid status selected.');
+        return;
+    }
+
+    // Siapkan data untuk dikirim
+    const dataToSend = {
+        status_id: statusId // Kirim status_id sebagai ObjectID
+    };
+
     try {
-        // Siapkan data yang akan dikirim
-        const dataToSend = {
-            status: {
-                _id: product.status._id, // Ambil ID status dari produk
-                status: newStatus        // Ubah status menjadi "Accepted" atau "Rejected"
-            },
-            categoryId: product.category._id // Ambil ID kategori dari produk
-        };
-
-        console.log("Data yang dikirim ke API:", JSON.stringify(dataToSend, null, 2)); // Debug log
-
-        // Kirim request ke backend
-        const responseUpdate = await fetch(`https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/product/${productId}`, {
+        const response = await fetch(`${baseURL}/products/${productId}/status`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`, // Sertakan token di header
             },
             body: JSON.stringify(dataToSend),
         });
 
-        // Tangani error
-        if (!responseUpdate.ok) {
-            const errorResponse = await responseUpdate.json(); // Dapatkan detail error dari API
+        if (!response.ok) {
+            const errorResponse = await response.json();
             console.error("Error detail dari API:", errorResponse);
-            throw new Error(`Gagal memperbarui status produk. Error: ${JSON.stringify(errorResponse)}`);
+            throw new Error(errorResponse.message || 'Gagal memperbarui status produk.');
         }
 
-        const updatedProduct = await responseUpdate.json();
+        const updatedProduct = await response.json();
         alert('Status produk berhasil diperbarui!');
         console.log('Produk yang diperbarui:', updatedProduct);
     } catch (error) {
         console.error("Error saat memperbarui status produk:", error);
-        alert(`Terjadi kesalahan saat memperbarui status produk: ${error.message}`);
+        alert(`Terjadi kesalahan: ${error.message}`);
     }
 }
-
 
 // Panggil fungsi fetchProductData saat halaman dimuat untuk mengisi dropdown
 fetchProductData();
