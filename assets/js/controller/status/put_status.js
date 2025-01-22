@@ -64,8 +64,8 @@ async function updateProductStatus() {
 
     // Mapping status yang dipilih dengan ObjectID yang sesuai
     const statusMapping = {
-        'accepted': '67811f31a6ffe1a1bca38c12',
-        'rejected': '67811f40a6ffe1a1bca38c13'
+        'Accepted': '67811f31a6ffe1a1bca38c12',
+        'Rejected': '67811f40a6ffe1a1bca38c13'
     };
 
     const statusId = statusMapping[newStatus];
