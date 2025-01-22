@@ -90,14 +90,13 @@ async function editProfile(event) {
       },
       body: JSON.stringify(updatedData), // Kirim data sebagai JSON
     });
-
     if (response.ok) {
       const updatedProfile = await response.json();
       console.log("Profile updated successfully:", updatedProfile);
-
-      // Tampilkan pesan sukses dan kembali ke dashboard admin
       alert("Profile updated successfully!");
-      window.location.href = "../../admin/dashboard.html"; // Sesuaikan rute dashboard admin Anda
+      
+      // Refresh form dengan data terbaru
+      await loadProfileData(); // Memastikan data di-refresh
     } else {
       const errorResponse = await response.json();
       console.error("Failed to update profile:", errorResponse.message);
