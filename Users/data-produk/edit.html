@@ -147,7 +147,9 @@
           Edit Product Data
         </h2>
         <form
+          id="formEditProduct"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
+          enctype="multipart/form-data"
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <!-- Input Nama Produk -->
@@ -177,7 +179,7 @@
                 Price
               </label>
               <input
-                type="number"
+                type="text"
                 id="price"
                 name="price"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -258,16 +260,122 @@
       <!-- CONTENT END -->
     </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const apiUrl = "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product";
+    const editProductForm = document.getElementById('editProductForm');
+    const categorySelect = document.getElementById('category_name');
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    const userLogin = document.getElementById("user-login");
+
+    // Function to decode JWT token
+    function parseJwt(token) {
+        try {
+            const base64Url = token.split(".")[1];
+            const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+            const jsonPayload = decodeURIComponent(
+                atob(base64)
+                    .split("")
+                    .map(function (c) {
+                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                    })
+                    .join("")
+            );
+            return JSON.parse(jsonPayload);
+        } catch (e) {
+            return {};
+        }
+    }
+
+   
+
+    // Fetch product details by ID
+    fetch(`${apiUrl}/${productId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        credentials: 'include'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success && data.data) {
+            const product = data.data;
+            document.getElementById('product_name').value = product.product_name;
+            document.getElementById('price').value = product.price;
+            document.getElementById('description').value = product.description;
+            document.getElementById('image').value = product.image;
+
+            // Set category from response
+            categorySelect.value = product.category.id; // Select the appropriate category
+        } else {
+            console.error('Invalid data structure:', data);
+        }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+
+    // Handle form submission to update product
+    editProductForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const productData = {
+            product_name: formData.get('product_name'),
+            price: formData.get('price'),
+            description: formData.get('description'),
+            category_name: formData.get('category_name'),
+            image: formData.get('image')
+        };
+
+        // Send PUT request to update the product
+        fetch(`${apiUrl}/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            credentials: 'include',
+            body: JSON.stringify(productData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Product updated successfully');
+                window.location.href = './products.html';  // Redirect to products page
+            } else {
+                alert('Failed to update product');
+            }
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    });
+});
+
+    </script>
     <!-- Fetch -->
-    <script type="module" src="../../assets/js/fetch_edit_product.js"></script>
-    <script
+    <!-- <script type="module" src="../../assets/js/fetch_edit_product.js"></script> -->
+    <!-- <script
       type="module"
       src="../../assets/js/config/url_put_product.js"
-    ></script>
-    <script
+    ></script> -->
+    <!-- <script
       type="module"
       src="../../assets/js/controller/put_product.js"
-    ></script>
+    ></script> -->
     <!-- AlpineJS -->
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"

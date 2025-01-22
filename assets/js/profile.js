@@ -94,26 +94,5 @@ document.addEventListener("DOMContentLoaded", function () {
       email: formData.get("email") || null,
       password: formData.get("password"),
     };
-
-    try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        localStorage.setItem("token", result.token); // Simpan token JWT
-        localStorage.setItem("username", data.username || data.email); // Simpan username/email
-        showSuccessPopup("Login berhasil! Anda akan diarahkan ke dashboard.");
-      } else {
-        const errorData = await response.json();
-        alert(errorData.message || "Login gagal. Silakan coba lagi.");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      alert("Terjadi kesalahan. Silakan coba lagi.");
-    }
   });
 });

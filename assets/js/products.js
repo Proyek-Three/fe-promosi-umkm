@@ -1,21 +1,23 @@
 fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
-        .then((response) => response.json())
-        .then((products) => {
-          const acceptedProducts = products.filter(
-            (product) => product.status.status === "Accepted"
-          );
-          const productContainer = document.getElementById("product-container");
+  .then((response) => response.json())
+  .then((products) => {
+    const acceptedProducts = products.filter(
+      (product) => product.status.status === "Accepted"
+    );
+    const productContainer = document.getElementById("product-container");
 
-          acceptedProducts.forEach((product) => {
-            const productElement = `
+    acceptedProducts.forEach((product) => {
+      console.log(product);
+      
+      const productElement = `
         <div
           class="bg-white rounded-lg shadow-lg p-8 product-item"
           data-category="${product.category.category_name.toLowerCase()}" 
           data-name="${product.product_name}"
-          data-store="${product.store_name}"
+          data-store="${product.user.store.store_name}"
           data-price="Rp. ${product.price.toLocaleString()}"
           data-description="${product.description}"
-          data-address="${product.store_address}"
+          data-address="${product.user.store.store_name}"
         >
           <img
             class="object-cover w-full h-48 rounded-t-lg"
@@ -38,43 +40,41 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
           </button>
         </div>
       `;
-            productContainer.innerHTML += productElement;
-          });
-        })
-        .catch((error) => console.error("Error fetching products:", error));
+      productContainer.innerHTML += productElement;
+    });
+  })
+  .catch((error) => console.error("Error fetching products:", error));
 
-      function showModal(button) {
-        // Ambil data dari atribut data-* pada tombol
-        const productName = button.closest(".product-item").dataset.name;
-        const productImage = button
-          .closest(".product-item")
-          .querySelector("img").src;
-        const storeName = button.closest(".product-item").dataset.store;
-        const price = button.closest(".product-item").dataset.price;
-        const description = button.closest(".product-item").dataset.description;
-        const address = button.closest(".product-item").dataset.address;
+function showModal(button) {
+  // Ambil data dari atribut data-* pada tombol
+  const productName = button.closest(".product-item").dataset.name;
+  const productImage = button.closest(".product-item").querySelector("img").src;
+  const storeName = button.closest(".product-item").dataset.user.store.store_name;
+  const price = button.closest(".product-item").dataset.price;
+  const description = button.closest(".product-item").dataset.description;
+  const address = button.closest(".product-item").dataset.user.store.store_name;
 
-        // Isi data ke dalam modal
-        document.getElementById("modalProductName").textContent = productName;
-        document.getElementById("modalProductImage").src = productImage;
-        document.getElementById("modalStoreName").textContent = storeName;
-        document.getElementById("modalPrice").textContent = price;
-        document.getElementById("modalDescription").textContent = description;
-        document.getElementById("modalAddress").textContent = address;
+  // Isi data ke dalam modal
+  document.getElementById("modalProductName").textContent = productName;
+  document.getElementById("modalProductImage").src = productImage;
+  document.getElementById("modalStoreName").textContent = storeName;
+  document.getElementById("modalPrice").textContent = price;
+  document.getElementById("modalDescription").textContent = description;
+  document.getElementById("modalAddress").textContent = address;
 
-        // Tampilkan modal
-        const modal = document.getElementById("productModal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-        modal.classList.remove("scale-95");
-        modal.classList.add("scale-100");
-      }
+  // Tampilkan modal
+  const modal = document.getElementById("productModal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  modal.classList.remove("scale-95");
+  modal.classList.add("scale-100");
+}
 
-      function closeModal() {
-        // Sembunyikan modal
-        const modal = document.getElementById("productModal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-        modal.classList.add("scale-95");
-        modal.classList.remove("scale-100");
-      }
+function closeModal() {
+  // Sembunyikan modal
+  const modal = document.getElementById("productModal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  modal.classList.add("scale-95");
+  modal.classList.remove("scale-100");
+}
