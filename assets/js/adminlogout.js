@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   confirmButtonText: "OK",
               }).then(() => {
                   // Redirect after success message is closed
-                  window.location.href = "../../../auth/login.html";
+                  window.location.href = "../auth/login.html";
               });
           } else {
               console.log("Logout dibatalkan.");
