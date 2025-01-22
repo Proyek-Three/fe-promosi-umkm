@@ -31,6 +31,7 @@
     ></script>
     <script src="../../assets/js/charts-lines.js" defer></script>
     <script src="../../assets/js/charts-pie.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div
@@ -326,14 +327,10 @@
                     </li>
 
                     <li class="flex">
-                      <a
-                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <span
-                          ><i class="fa-solid fa-right-from-bracket"></i>
-                          Logout</span
-                        >
+                      <a id="logoutButton" 
+                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                         href="#">
+                        <span><i class="fa-solid fa-right-from-bracket"></i> Logout</span>
                       </a>
                     </li>
                   </ul>
@@ -402,6 +399,7 @@
       src="../../assets/js/controller/put_product.js"
     ></script>
     <script src="../../assets/js/controller/status/put_status.js"></script>
+    <script type="module" src="../../assets/js/adminlogout.js" defer></script>
 
     <!-- <script
       type="module"

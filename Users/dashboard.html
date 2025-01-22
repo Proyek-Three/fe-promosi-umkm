@@ -15,7 +15,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../assets/js/logoutusers.js"></script>
   <script src="../assets/js/profile.js"></script>
+
+
 </head>
 
 <body class="bg-gray-100 font-family-karla flex">
@@ -39,7 +43,7 @@
       </a>
     </nav>
   </aside>
-  
+
   <div class="w-full flex flex-col h-screen overflow-y-hidden">
     <!-- Desktop Header -->
     <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
@@ -51,16 +55,16 @@
         </button>
         <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
         <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-          <span id="dropdownUsername" class="block px-4 py-2 text-gray-600 font-bold">
-            <!-- Username akan diisi oleh JS -->
-            Loading...
-          </span>
           <a href="./profile/index.html" class="block px-4 py-2 account-link hover:text-white">
             <i class="fa-solid fa-user mr-3"></i>Profile
           </a>
-          <button id="logoutButton" class="block px-4 py-2 account-link hover:text-white">
-            <i class="fa-solid fa-right-from-bracket mr-3"></i>Sign Out
+          <button id="logoutButton" class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item">
+            <i class="fas fa-sign-out-alt mr-3"></i>
+            Sign Out
           </button>
+
+
+
 
 
 
@@ -95,10 +99,12 @@
           <i class="fa-solid fa-user mr-3"></i>
           Profile
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+        <button id="logoutButton" class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item">
           <i class="fas fa-sign-out-alt mr-3"></i>
           Sign Out
-        </a>
+        </button>
+
+
       </nav>
     </header>
 
