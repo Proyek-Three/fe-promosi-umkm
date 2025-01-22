@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     localStorage.removeItem("adminData");
                     
                     // Redirect to login page
-                    window.location.href = "../../auth/login.html";
+                    window.location.href = "../auth/login.html";
                 });
             } else {
                 console.log("Logout dibatalkan.");

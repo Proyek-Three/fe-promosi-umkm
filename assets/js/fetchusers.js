@@ -97,7 +97,6 @@ async function editProfile(event) {
 
       // Tampilkan pesan sukses dan kembali ke dashboard admin
       alert("Profile updated successfully!");
-      window.location.href = "../../admin/dashboard.html"; // Sesuaikan rute dashboard admin Anda
     } else {
       const errorResponse = await response.json();
       console.error("Failed to update profile:", errorResponse.message);
