@@ -146,6 +146,7 @@
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
           Edit Product Data
         </h2>
+        
         <form
           id="formEditProduct"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
@@ -308,7 +309,7 @@
     .then(data => {
         if (data.success && data.data) {
             const product = data.data;
-            document.getElementById('product_name').value = product.product_name;
+            document.getElementById('product_name').value = product.user.product_name;
             document.getElementById('price').value = product.price;
             document.getElementById('description').value = product.description;
             document.getElementById('image').value = product.image;
