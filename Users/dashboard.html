@@ -1,153 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard User</title>
+    <meta name="author" content="David Grzyb" />
+    <meta name="description" content="" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard User</title>
-  <meta name="author" content="David Grzyb" />
-  <meta name="description" content="" />
+    <!-- Tailwind -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/users.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/logoutusers.js"></script>
+    <script src="../assets/js/profile.js"></script>
+  </head>
 
-  <!-- Tailwind -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/users.css" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="../assets/js/logoutusers.js"></script>
-  <script src="../assets/js/profile.js"></script>
-
-
-</head>
-
-<body class="bg-gray-100 font-family-karla flex">
-  <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
-    <div class="p-6">
-      <a class="text-white text-2xl font-semibold uppercase hover:text-gray-300">Dashboard</a>
-    </div>
-    <nav class="text-white text-base font-semibold pt-3">
-      <a href="dashboard.html" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
-        <i class="fas fa-tachometer-alt mr-3"></i>
-        Dashboard
-      </a>
-      <a href="data-produk/index.html"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-        <i class="fas fa-table mr-3"></i>
-        Product Data
-      </a>
-      <a href="profile/index.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-        <i class="fa-solid fa-user mr-3"></i>
-        Profile
-      </a>
-    </nav>
-  </aside>
-
-  <div class="w-full flex flex-col h-screen overflow-y-hidden">
-    <!-- Desktop Header -->
-    <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
-      <div class="w-1/2"></div>
-      <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-        <button @click="isOpen = !isOpen"
-          class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
-        <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-          <a href="./profile/index.html" class="block px-4 py-2 account-link hover:text-white">
-            <i class="fa-solid fa-user mr-3"></i>Profile
-          </a>
-          <button id="logoutButton" class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item">
-            <i class="fas fa-sign-out-alt mr-3"></i>
-            Sign Out
-          </button>
-
-
-
-
-
-
-        </div>
-
+  <body class="bg-gray-100 font-family-karla flex">
+    <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+      <div class="p-6">
+        <a
+          class="text-white text-2xl font-semibold uppercase hover:text-gray-300"
+          >Dashboard</a
+        >
       </div>
-    </header>
-
-    <!-- Mobile Header & Nav -->
-    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
-      <div class="flex items-center justify-between">
-        <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Dashboard</a>
-        <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
-          <i x-show="!isOpen" class="fas fa-bars"></i>
-          <i x-show="isOpen" class="fas fa-times"></i>
-        </button>
-      </div>
-
-      <!-- Dropdown Nav -->
-      <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-        <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+      <nav class="text-white text-base font-semibold pt-3">
+        <a
+          href="dashboard.html"
+          class="flex items-center active-nav-link text-white py-4 pl-6 nav-item"
+        >
           <i class="fas fa-tachometer-alt mr-3"></i>
           Dashboard
         </a>
-        <a href="data-produk/index.html"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+        <a
+          href="data-produk/index.html"
+          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item"
+        >
           <i class="fas fa-table mr-3"></i>
           Product Data
         </a>
-        <a href="./profile/index.html"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item" type="button">
+        <a
+          href="profile/index.html"
+          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item"
+        >
           <i class="fa-solid fa-user mr-3"></i>
           Profile
         </a>
-        <button id="logoutButton" class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item">
-          <i class="fas fa-sign-out-alt mr-3"></i>
-          Sign Out
-        </button>
-
-
       </nav>
-    </header>
+    </aside>
 
-    <!-- CONTENT -->
-    <div class="w-full overflow-x-hidden border-t flex flex-col">
-      <div class="container px-6 mx-auto grid">
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          Dashboard
-        </h2>
-        <!-- Cards -->
-        <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-          <!-- Card -->
-          <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </div>
-            <div>
-              <p class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400">
-                Product Data
-              </p>
-              <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                1
-              </p>
-            </div>
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+      <!-- Desktop Header -->
+      <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+        <div class="w-1/2"></div>
+        <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+          <button
+            @click="isOpen = !isOpen"
+            class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <button
+            x-show="isOpen"
+            @click="isOpen = false"
+            class="h-full w-full fixed inset-0 cursor-default"
+          ></button>
+          <div
+            x-show="isOpen"
+            class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16"
+          >
+            <a
+              href="./profile/index.html"
+              class="block px-4 py-2 account-link hover:text-white"
+            >
+              <i class="fa-solid fa-user mr-3"></i>Profile
+            </a>
+            <button
+              id="logoutButton"
+              class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item"
+            >
+              <i class="fas fa-sign-out-alt mr-3"></i>
+              Sign Out
+            </button>
           </div>
         </div>
-        <hr />
+      </header>
+
+      <!-- Mobile Header & Nav -->
+      <header
+        x-data="{ isOpen: false }"
+        class="w-full bg-sidebar py-5 px-6 sm:hidden"
+      >
+        <div class="flex items-center justify-between">
+          <a
+            href="index.html"
+            class="text-white text-3xl font-semibold uppercase hover:text-gray-300"
+            >Dashboard</a
+          >
+          <button
+            @click="isOpen = !isOpen"
+            class="text-white text-3xl focus:outline-none"
+          >
+            <i x-show="!isOpen" class="fas fa-bars"></i>
+            <i x-show="isOpen" class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <!-- Dropdown Nav -->
+        <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+          <a
+            href="index.html"
+            class="flex items-center active-nav-link text-white py-2 pl-4 nav-item"
+          >
+            <i class="fas fa-tachometer-alt mr-3"></i>
+            Dashboard
+          </a>
+          <a
+            href="data-produk/index.html"
+            class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
+          >
+            <i class="fas fa-table mr-3"></i>
+            Product Data
+          </a>
+          <a
+            href="./profile/index.html"
+            class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item"
+            type="button"
+          >
+            <i class="fa-solid fa-user mr-3"></i>
+            Profile
+          </a>
+          <button
+            id="logoutButton"
+            class="flex items-center text-gray-600 hover:text-white py-2 pl-4 nav-item"
+          >
+            <i class="fas fa-sign-out-alt mr-3"></i>
+            Sign Out
+          </button>
+        </nav>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="w-full overflow-x-hidden border-t flex flex-col">
+        <div class="container px-6 mx-auto grid">
+          <h2
+            class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
+          >
+            Dashboard
+          </h2>
+          <!-- Cards -->
+          <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+            <!-- Card -->
+            <div
+              id="product-count-card"
+              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+            >
+              <div
+                class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400"
+                >
+                  Product Data
+                </p>
+                <p
+                  id="product-count"
+                  class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                >
+                  -
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            // Fungsi untuk mendapatkan jumlah produk berdasarkan user ID
+            async function loadProductCount() {
+              try {
+                const token = getToken(); // Ambil token dari cookie
+                if (!token) {
+                  alert("You are not authenticated. Please login first.");
+                  window.location.href = "../../auth/login.html";
+                  return;
+                }
+
+                const response = await fetch(
+                  "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product-seller",
+                  {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`, // Tambahkan token pada header
+                    },
+                  }
+                );
+
+                if (response.ok) {
+                  const result = await response.json(); // Ambil respons JSON
+                  const products = result.data; // Akses properti 'data'
+
+                  console.log("Products data loaded:", products);
+
+                  // Hitung jumlah produk
+                  const productCount = products.length;
+
+                  // Tampilkan jumlah produk di card
+                  const productCountElement =
+                    document.getElementById("product-count");
+                  productCountElement.textContent = `${productCount}`;
+                } else {
+                  const errorResponse = await response.json();
+                  console.error(
+                    "Failed to load product count:",
+                    errorResponse.message
+                  );
+                  alert(
+                    `Failed to load product count: ${errorResponse.message}`
+                  );
+                }
+              } catch (error) {
+                console.error("Error loading product count:", error);
+                alert("An error occurred while loading product count.");
+              }
+            }
+
+            // Fungsi untuk mengambil token dari cookie
+            function getToken() {
+              return document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("token="))
+                ?.split("=")[1];
+            }
+
+            // Panggil loadProductCount() saat halaman dimuat
+            document.addEventListener("DOMContentLoaded", loadProductCount);
+          </script>
+
+          <hr />
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- AlpineJS -->
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <!-- Font Awesome -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  <!-- ChartJS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-    integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-</body>
-
+    <!-- AlpineJS -->
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <!-- Font Awesome -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+      integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
+      crossorigin="anonymous"
+    ></script>
+    <!-- ChartJS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+      integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
