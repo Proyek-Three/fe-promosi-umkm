@@ -11,24 +11,24 @@ export let isiTabel =
         />
       </div>
     </td>
-    <td class="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-200">
+    <td class="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-900">
       #STORENAME#
     </td>
-    <td class="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-200">
+    <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
       #PRODUCTNAME#
     </td>
-    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+    <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
       #CATEGORYNAME#
     </td>
-    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs">
+    <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900 truncate max-w-xs">
       #DESCRIPTION#
     </td>
-    <td class="px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
+    <td class="px-4 py-3 text-sm text-green-900 font-bold text-green-600 dark:text-green-400">
       #PRICE#
     </td>
     <td class="px-4 py-3">
       <span
-        class="px-3 py-1 text-xs text-gray-600 dark:text-gray-400"
+        class="px-3 py-3 text-sm text-gray-900 font-bold dark:text-gray-900"
       >
         #STATUS#
       </span>
