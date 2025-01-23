@@ -6,21 +6,21 @@ export let isiTabel =
     <td class="px-4 py-3 text-justify">
       <div class="flex items-center space-x-4 text-sm">
         <a
-          class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+          class="flex items-center justify-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label="Edit"
           type="button"
           href="edit.html?categoryId=#IDEDIT#"
         > 
-          <i class="fa-solid fa-pen-to-square"></i>   
+          <i class="fa-solid fa-pen-to-square mr-2"></i> Edit 
         </a>
         <button
-          class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+          class="flex items-center justify-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
           aria-label="Delete"
           type="button"
           id="del_button"
           onclick="confirmDelete('#IDHAPUS#')"
         >
-          <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-trash mr-2"></i> Delete
         </button>
       </div>
     </td>
