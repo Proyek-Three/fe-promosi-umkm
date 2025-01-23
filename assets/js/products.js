@@ -7,8 +7,6 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
     const productContainer = document.getElementById("product-container");
 
     acceptedProducts.forEach((product) => {
-      console.log(product);
-      
       const productElement = `
         <div
           class="bg-white rounded-lg shadow-lg p-8 product-item"
@@ -24,10 +22,12 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
             src="${product.image}"
             alt="${product.product_name}"
           />
-          <h3 class="text-xl font-bold text-gray-900 mt-4">${
-            product.product_name
-          }</h3>
-          <h4 class="text-gray-500 font-bold text-sm mt-2">Rp. ${product.price.toLocaleString()}</h4>
+          <h3 class="text-xl font-bold text-gray-900 mt-4">
+            ${product.product_name}
+          </h3>
+          <h4 class="text-gray-500 font-bold text-sm mt-2">
+            Rp. ${product.price.toLocaleString()}
+          </h4>
           <p class="text-gray-500 text-sm text-justify mt-2">
             ${product.description}
           </p>
@@ -46,13 +46,16 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
   .catch((error) => console.error("Error fetching products:", error));
 
 function showModal(button) {
-  // Ambil data dari atribut data-* pada tombol
-  const productName = button.closest(".product-item").dataset.name;
-  const productImage = button.closest(".product-item").querySelector("img").src;
-  const storeName = button.closest(".product-item").dataset.user.store.store_name;
-  const price = button.closest(".product-item").dataset.price;
-  const description = button.closest(".product-item").dataset.description;
-  const address = button.closest(".product-item").dataset.user.store.store_name;
+  // Ambil elemen item produk terdekat
+  const productItem = button.closest(".product-item");
+
+  // Ambil data dari atribut data-*
+  const productName = productItem.dataset.name;
+  const productImage = productItem.querySelector("img").src;
+  const storeName = productItem.dataset.store;
+  const price = productItem.dataset.price;
+  const description = productItem.dataset.description;
+  const address = productItem.dataset.address;
 
   // Isi data ke dalam modal
   document.getElementById("modalProductName").textContent = productName;
