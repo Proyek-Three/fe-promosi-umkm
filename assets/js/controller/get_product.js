@@ -27,3 +27,8 @@ function isiRow(value) {
             .replace("#IDHAPUS#", value.id)    
     addInner("iniTabel", content);
 }
+
+
+
+
+
