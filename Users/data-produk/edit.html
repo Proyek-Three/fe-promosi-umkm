@@ -146,7 +146,7 @@
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
           Edit Product Data
         </h2>
-        
+
         <form
           id="formEditProduct"
           class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800"
@@ -250,7 +250,7 @@
             Back
           </button>
           <button
-            type="submit"
+            type="submit" id="editProductForm"
             class="mt-6 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-3 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
           >
             Edit
@@ -262,110 +262,227 @@
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product";
-    const editProductForm = document.getElementById('editProductForm');
-    const categorySelect = document.getElementById('category_name');
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    const userLogin = document.getElementById("user-login");
+      // Fungsi untuk mendapatkan cookie berdasarkan nama
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
 
-    // Function to decode JWT token
-    function parseJwt(token) {
+      // Fungsi untuk mendekode JWT dan mendapatkan payload
+      function decodeJwt(token) {
+        const base64Url = token.split(".")[1]; // Ambil bagian payload (second part of JWT)
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Decode URL-safe Base64
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        return JSON.parse(jsonPayload); // Kembalikan payload yang sudah didekode
+      }
+
+      // Fungsi untuk mendapatkan data kategori dan mengisi dropdown
+      async function loadCategories() {
+        const token = getCookie("token"); // Ambil token dari cookie
+
+        // Periksa apakah token ada
+        if (!token) {
+          alert("No token found. Please log in first.");
+          return;
+        }
+
         try {
-            const base64Url = token.split(".")[1];
-            const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-            const jsonPayload = decodeURIComponent(
-                atob(base64)
-                    .split("")
-                    .map(function (c) {
-                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-                    })
-                    .join("")
+          // Ambil data kategori
+          const response = await fetch(
+            "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/category",
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const categories = await response.json();
+          console.log(categories);
+
+          // Ambil elemen dropdown
+          const categoryDropdown = document.getElementById("category_name");
+
+          // Hapus semua opsi yang ada
+          categoryDropdown.innerHTML = "";
+
+          // Tambahkan opsi default
+          const defaultOption = document.createElement("option");
+          defaultOption.value = "";
+          defaultOption.textContent = "Select Category";
+          defaultOption.disabled = true;
+          defaultOption.selected = true;
+          categoryDropdown.appendChild(defaultOption);
+
+          // Tambahkan kategori ke dalam dropdown
+          categories.forEach((category) => {
+            const option = document.createElement("option");
+            option.value = category.id;
+            option.textContent = category.category_name;
+            categoryDropdown.appendChild(option);
+          });
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+        }
+      }
+
+      // Fungsi untuk mendapatkan data produk berdasarkan ID
+      async function getProductById(productId) {
+        const token = getCookie("token"); // Ambil token dari cookie
+
+        // Periksa apakah token ada
+        if (!token) {
+          alert("No token found. Please log in first.");
+          return;
+        }
+
+        try {
+          // Ambil data produk berdasarkan ID
+          const response = await fetch(
+            `https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product/${productId}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const product = await response.json();
+          console.log(product);
+
+          // Isi form dengan data produk
+          document.getElementById("product_name").value = product.product_name;
+          document.getElementById("price").value = product.price;
+          document.getElementById("description").value = product.description;
+          document.getElementById("category_name").value = product.category.id; // Set value kategori sesuai produk
+
+          // Menampilkan gambar produk
+          const imageElement = document.getElementById("image_preview");
+          if (imageElement) {
+            imageElement.src = product.image;
+          }
+        } catch (error) {
+          console.error("Error fetching product data:", error);
+        }
+      }
+
+      // Ketika halaman di-load, ambil ID produk dari URL atau parameter dan dapatkan data produk
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get("productId"); // Ambil ID produk dari query string URL
+
+        if (productId) {
+          loadCategories(); // Muat kategori sebelum produk
+          getProductById(productId); // Ambil data produk jika ID ada
+        }
+      });
+
+      // Fungsi untuk update produk
+      document
+        .getElementById("editProductForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Cegah form dari pengiriman default
+
+          // Ambil token dari cookie
+          const token = getCookie("token"); // Ganti dengan nama cookie tempat Anda menyimpan token
+
+          // Periksa apakah token ada
+          if (!token) {
+            alert("No token found. Please log in first.");
+            return;
+          }
+
+          console.log(token);
+
+          // Dekode token dan ambil user.id
+          const decodedToken = decodeJwt(token);
+          const userId = decodedToken.user_id; // Ambil user.id dari payload token
+          console.log("User ID:", userId); // Debugging
+
+          // Ambil data dari form
+          const productId = document.getElementById("productId").value; // Ambil ID produk yang akan diupdate
+          const productName = document.getElementById("product_name").value;
+          const price = document.getElementById("price").value;
+          const description = document.getElementById("description").value;
+          const categoryId = document.getElementById("category_name").value;
+          const image = document.getElementById("image").files[0]; // Ambil file yang diupload
+
+          // Cek apakah file gambar ada
+          if (!image) {
+            alert("Please upload an image for the product.");
+            return;
+          }
+
+          const statusId = "67910940c6747400bebfe2cd";
+
+          // Buat FormData untuk mengirim data dengan file
+          const formData = new FormData();
+          formData.append("ProductName", productName);
+          formData.append("price", price);
+          formData.append("description", description);
+          formData.append("category.id", categoryId);
+          formData.append("status.id", statusId);
+          formData.append("image", image); // File gambar
+          formData.append("user.id", userId); // User ID dari token yang didekode
+
+          try {
+            // Kirim data ke API untuk update produk
+            const response = await fetch(
+              `https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/product/${productId}`,
+              {
+                method: "PUT",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+              }
             );
-            return JSON.parse(jsonPayload);
-        } catch (e) {
-            return {};
-        }
-    }
 
-   
+            const result = await response.json();
+            console.log(result);
 
-    // Fetch product details by ID
-    fetch(`${apiUrl}/${productId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        credentials: 'include'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success && data.data) {
-            const product = data.data;
-            document.getElementById('product_name').value = product.user.product_name;
-            document.getElementById('price').value = product.price;
-            document.getElementById('description').value = product.description;
-            document.getElementById('image').value = product.image;
-
-            // Set category from response
-            categorySelect.value = product.category.id; // Select the appropriate category
-        } else {
-            console.error('Invalid data structure:', data);
-        }
-    })
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-    });
-
-    // Handle form submission to update product
-    editProductForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const productData = {
-            product_name: formData.get('product_name'),
-            price: formData.get('price'),
-            description: formData.get('description'),
-            category_name: formData.get('category_name'),
-            image: formData.get('image')
-        };
-
-        // Send PUT request to update the product
-        fetch(`${apiUrl}/${productId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            credentials: 'include',
-            body: JSON.stringify(productData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                alert('Product updated successfully');
-                window.location.href = './products.html';  // Redirect to products page
+            if (response.ok) {
+              // Tampilkan pesan sukses menggunakan SweetAlert2
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: result.message,
+                showConfirmButton: true,
+              }).then(() => {
+                window.location.href = "index.html"; // Ganti dengan halaman yang sesuai setelah berhasil
+              });
             } else {
-                alert('Failed to update product');
+              // Tampilkan pesan error menggunakan SweetAlert2
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text:
+                  result.message ||
+                  "An error occurred while updating the product.",
+                showConfirmButton: true,
+              });
             }
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
+          } catch (error) {
+            console.error("Error:", error);
+            // Tampilkan pesan error umum menggunakan SweetAlert2
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "An error occurred while updating the product.",
+              showConfirmButton: true,
+            });
+          }
         });
-    });
-});
-
     </script>
     <!-- Fetch -->
     <!-- <script type="module" src="../../assets/js/fetch_edit_product.js"></script> -->
