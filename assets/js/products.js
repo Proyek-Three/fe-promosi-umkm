@@ -15,7 +15,7 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
           data-store="${product.user.store.store_name}"
           data-price="Rp. ${product.price.toLocaleString()}"
           data-description="${product.description}"
-          data-address="${product.user.store.store_name}"
+          data-address="${product.user.store.address}"
         >
           <img
             class="object-cover w-full h-48 rounded-t-lg"
