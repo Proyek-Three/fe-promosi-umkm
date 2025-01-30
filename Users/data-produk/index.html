@@ -184,6 +184,14 @@
     </div>
 
     <script>
+      function formatRupiah(angka) {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        }).format(angka);
+      }
+
       function addRowToTable(product) {
         const tableBody = document.getElementById("productsTableBody");
 
@@ -229,7 +237,7 @@
       </div>
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold text-gray-900 dark:text-white">
-          Rp. ${product.price}
+          ${formatRupiah(product.price)}
         </span>
       </div>
       <div class="flex gap-2">
