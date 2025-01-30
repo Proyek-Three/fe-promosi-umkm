@@ -18,11 +18,11 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
 
         acceptedProducts.forEach((product) => {
           console.log("Processing product:", product);
-          
-          const userId = product.user && product.user._id ? product.user._id : null;
-          console.log("Looking for phone number with user ID:", userId);
-          
-          const phoneNumber = userId ? phoneMap.get(userId) || "N/A" : "N/A";
+
+          const productId = product.id;
+          console.log("Looking for phone number with product ID:", productId);
+
+          const phoneNumber = productId ? phoneMap.get(productId) || "N/A" : "N/A";
           console.log("Assigned phone number:", phoneNumber);
 
           const productElement = `
