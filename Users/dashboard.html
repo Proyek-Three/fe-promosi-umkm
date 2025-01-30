@@ -160,27 +160,21 @@
           </h2>
           <!-- Cards -->
           <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-            <!-- Card -->
+            <!-- Card Product Data -->
             <div
               id="product-count-card"
               class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
             >
               <div
-                class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
+                class="p-3 mr-4 text-green-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500"
               >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
+                <i class="fa-solid fa-table"></i>
               </div>
               <div>
                 <p
                   class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400"
                 >
-                  Product Data
+                  All Product Data
                 </p>
                 <p
                   id="product-count"
@@ -190,81 +184,154 @@
                 </p>
               </div>
             </div>
+
+            <!-- Card Accepted Product-->
+            <div
+              id="product-count-card"
+              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+            >
+              <div
+                class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
+              >
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                <p
+                  class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400"
+                >
+                  Accepted Product
+                </p>
+                <p
+                  id="product-count-accepted"
+                  class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                >
+                  -
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Rejected Product-->
+            <div
+              id="product-count-card"
+              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+            >
+              <div
+                class="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500"
+              >
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                <p
+                  class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400"
+                >
+                  Rejected Product
+                </p>
+                <p
+                  id="product-count-rejected"
+                  class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                >
+                  -
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Pending Product-->
+            <div
+              id="product-count-card"
+              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+            >
+              <div
+                class="p-3 mr-4 text-yellow-500 bg-yellow-100 rounded-full dark:text-yellow-100 dark:bg-yellow-500"
+              >
+                <i class="fa-solid fa-spinner"></i>
+              </div>
+              <div>
+                <p
+                  class="mb-2 text-sm font-medium font-bold text-gray-600 dark:text-gray-400"
+                >
+                  Pending Product
+                </p>
+                <p
+                  id="product-count-pending"
+                  class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                >
+                  -
+                </p>
+              </div>
+            </div>
           </div>
-
-          <script>
-            // Fungsi untuk mendapatkan jumlah produk berdasarkan user ID
-            async function loadProductCount() {
-              try {
-                const token = getToken(); // Ambil token dari cookie
-                if (!token) {
-                  alert("You are not authenticated. Please login first.");
-                  window.location.href = "../../auth/login.html";
-                  return;
-                }
-
-                const response = await fetch(
-                  "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product-seller",
-                  {
-                    method: "GET",
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `Bearer ${token}`, // Tambahkan token pada header
-                    },
-                  }
-                );
-
-                if (response.ok) {
-                  const result = await response.json(); // Ambil respons JSON
-                  const products = result.data; // Akses properti 'data'
-
-                  console.log("Products data loaded:", products);
-
-                  // Hitung jumlah produk
-                  const productCount = products.length;
-
-                  // Tampilkan jumlah produk di card
-                  const productCountElement =
-                    document.getElementById("product-count");
-                  productCountElement.textContent = `${productCount}`;
-                } else {
-                  const errorResponse = await response.json();
-                  console.error(
-                    "Failed to load product count:",
-                    errorResponse.message
-                  );
-                  alert(
-                    `Failed to load product count: ${errorResponse.message}`
-                  );
-                }
-              } catch (error) {
-                console.error("Error loading product count:", error);
-                alert("An error occurred while loading product count.");
-              }
-            }
-
-            // Fungsi untuk mengambil token dari cookie
-            function getToken() {
-              return document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("token="))
-                ?.split("=")[1];
-            }
-
-            // Panggil loadProductCount() saat halaman dimuat
-            document.addEventListener("DOMContentLoaded", loadProductCount);
-          </script>
-
           <hr />
         </div>
       </div>
     </div>
+
+    <script>
+      // Fungsi untuk mendapatkan jumlah produk berdasarkan user ID
+      async function loadProductCount() {
+        try {
+          const token = getToken(); // Ambil token dari cookie
+          if (!token) {
+            alert("You are not authenticated. Please login first.");
+            window.location.href = "../../auth/login.html";
+            return;
+          }
+
+          const response = await fetch(
+            "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product-seller",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`, // Tambahkan token pada header
+              },
+            }
+          );
+
+          if (response.ok) {
+            const result = await response.json(); // Ambil respons JSON
+            const products = result.data; // Akses properti 'data'
+
+            console.log("Products data loaded:", products);
+
+            // Hitung jumlah produk
+            const productCount = products.length;
+
+            // Tampilkan jumlah produk di card
+            const productCountElement =
+              document.getElementById("product-count");
+            productCountElement.textContent = `${productCount}`;
+          } else {
+            const errorResponse = await response.json();
+            console.error(
+              "Failed to load product count:",
+              errorResponse.message
+            );
+            alert(`Failed to load product count: ${errorResponse.message}`);
+          }
+        } catch (error) {
+          console.error("Error loading product count:", error);
+          alert("An error occurred while loading product count.");
+        }
+      }
+
+      // Fungsi untuk mengambil token dari cookie
+      function getToken() {
+        return document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("token="))
+          ?.split("=")[1];
+      }
+
+      // Panggil loadProductCount() saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", loadProductCount);
+    </script>
 
     <!-- AlpineJS -->
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    <script src="../assets/js/card_dashboard_seller.js"></script>
     <!-- Font Awesome -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
