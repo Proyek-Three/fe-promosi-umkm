@@ -190,9 +190,10 @@
                 oninput="formatRupiah(this)"
               />
             </div>
+
             <script>
               function formatRupiah(input) {
-                let value = input.value.replace(/[^\d]/g, ""); // Hanya ambil angka
+                let value = input.value.replace(/[^\d]/g, ""); // Menghapus semua karakter selain angka
                 let formattedValue = "";
 
                 // Format angka menjadi format Rupiah
@@ -204,7 +205,11 @@
                 }
 
                 // Set value ke input dengan format Rupiah
-                input.value = "Rp " + formattedValue;
+                if (formattedValue) {
+                  input.value = "Rp " + formattedValue; // Menambahkan Rp di depan
+                } else {
+                  input.value = ""; // Jika kosong, kosongkan field
+                }
               }
             </script>
 
@@ -303,7 +308,7 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(";").shift();
       }
-    
+
       // Fungsi untuk mendekode JWT dan mendapatkan payload
       function decodeJwt(token) {
         const base64Url = token.split(".")[1]; // Ambil bagian payload (second part of JWT)
@@ -318,33 +323,33 @@
         );
         return JSON.parse(jsonPayload); // Kembalikan payload yang sudah didekode
       }
-    
+
       // Fungsi untuk memformat angka ke format Rupiah
       function formatRupiah(angka, prefix = "Rp ") {
         return prefix + angka.toLocaleString("id-ID");
       }
-    
+
       // Ketika halaman di-load, ambil ID produk dari URL atau parameter dan dapatkan data produk
       document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get("productId"); // Ambil ID produk dari query string URL
-    
+
         if (productId) {
           loadCategories(); // Muat kategori sebelum produk
           getProductById(productId); // Ambil data produk jika ID ada
         }
       });
-    
+
       // Fungsi untuk mendapatkan data kategori dan mengisi dropdown
       async function loadCategories() {
         const token = getCookie("token"); // Ambil token dari cookie
-    
+
         // Periksa apakah token ada
         if (!token) {
           alert("No token found. Please log in first.");
           return;
         }
-    
+
         try {
           // Ambil data kategori
           const response = await fetch(
@@ -356,16 +361,16 @@
               },
             }
           );
-    
+
           const categories = await response.json();
           console.log(categories);
-    
+
           // Ambil elemen dropdown
           const categoryDropdown = document.getElementById("category_name");
-    
+
           // Hapus semua opsi yang ada
           categoryDropdown.innerHTML = "";
-    
+
           // Tambahkan opsi default
           const defaultOption = document.createElement("option");
           defaultOption.value = "";
@@ -373,7 +378,7 @@
           defaultOption.disabled = true;
           defaultOption.selected = true;
           categoryDropdown.appendChild(defaultOption);
-    
+
           // Tambahkan kategori ke dalam dropdown
           categories.forEach((category) => {
             const option = document.createElement("option");
@@ -385,18 +390,18 @@
           console.error("Error fetching categories:", error);
         }
       }
-    
+
       let previousImage = ""; // Simpan gambar lama
-    
+
       // Fungsi untuk mendapatkan data produk berdasarkan ID
       async function getProductById(productId) {
         const token = getCookie("token"); // Ambil token dari cookie
-    
+
         if (!token) {
           alert("No token found. Please log in first.");
           return;
         }
-    
+
         try {
           const response = await fetch(
             `https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product/${productId}`,
@@ -407,20 +412,20 @@
               },
             }
           );
-    
+
           const product = await response.json();
           console.log(product);
-    
+
           document.getElementById("product_name").value = product.product_name;
           document.getElementById("price").value = formatRupiah(product.price); // Menampilkan harga dalam format Rupiah
           document.getElementById("description").value = product.description;
           document.getElementById("category_name").value = product.category.id;
-    
+
           // Menyimpan gambar lama
           previousImage = product.image;
-    
+
           console.log("Previous image:", previousImage);
-    
+
           // Menampilkan gambar lama
           const imageElement = document.getElementById("image_preview");
           if (imageElement) {
@@ -430,41 +435,43 @@
           console.error("Error fetching product data:", error);
         }
       }
-    
+
       async function urlToFile(url, filename, mimeType) {
         const response = await fetch(url);
         const blob = await response.blob();
         return new File([blob], filename, { type: mimeType });
       }
-    
+
       document
         .getElementById("formEditProduct")
         .addEventListener("submit", async function (event) {
           event.preventDefault();
-    
+
           const token = getCookie("token");
-    
+
           if (!token) {
             alert("No token found. Please log in first.");
             window.location.href = "../../auth/login.html";
             return;
           }
-    
+
           const decodedToken = decodeJwt(token);
           const userId = decodedToken.user_id;
           console.log("User ID:", userId);
-    
+
           const productId = new URLSearchParams(window.location.search).get(
             "productId"
           );
           const productName = document.getElementById("product_name").value;
-          const price = document.getElementById("price").value.replace(/[^\d]/g, ''); // Menghapus format Rupiah saat submit
+          const price = document
+            .getElementById("price")
+            .value.replace(/[^\d]/g, ""); // Menghapus format Rupiah saat submit
           const description = document.getElementById("description").value;
           const categoryId = document.getElementById("category_name").value;
           const imageFile = document.getElementById("image").files[0];
-    
+
           const statusId = "67910940c6747400bebfe2cd";
-    
+
           const formData = new FormData();
           formData.append("ProductName", productName);
           formData.append("price", price); // Menggunakan harga yang sudah diproses
@@ -472,7 +479,7 @@
           formData.append("category.id", categoryId);
           formData.append("status.id", statusId);
           formData.append("user.id", userId);
-    
+
           // Jika ada gambar baru, gunakan gambar baru
           if (imageFile) {
             formData.append("image", imageFile);
@@ -504,9 +511,9 @@
             });
             return;
           }
-    
+
           console.log("Form data:", formData);
-    
+
           try {
             const response = await fetch(
               `https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/product/${productId}`,
@@ -518,10 +525,10 @@
                 body: formData,
               }
             );
-    
+
             const result = await response.json();
             console.log(result);
-    
+
             if (response.ok) {
               Swal.fire({
                 icon: "success",
@@ -552,7 +559,7 @@
           }
         });
     </script>
-    
+
     <!-- Fetch -->
     <!-- <script type="module" src="../../assets/js/fetch_edit_product.js"></script> -->
     <!-- <script
