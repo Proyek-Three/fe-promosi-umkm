@@ -180,14 +180,33 @@
                 Price
               </label>
               <input
-                type="number"
+                type="text"
                 id="price"
                 name="price"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Price"
                 required
+                oninput="formatRupiah(this)"
               />
             </div>
+
+            <script>
+              function formatRupiah(input) {
+                let value = input.value.replace(/[^\d]/g, ""); // Hanya ambil angka
+                let formattedValue = "";
+
+                // Format angka menjadi format Rupiah
+                for (let i = value.length - 1; i >= 0; i--) {
+                  formattedValue = value[i] + formattedValue;
+                  if ((value.length - i) % 3 === 0 && i !== 0) {
+                    formattedValue = "." + formattedValue;
+                  }
+                }
+
+                // Set value ke input dengan format Rupiah
+                input.value = "Rp " + formattedValue;
+              }
+            </script>
 
             <!-- Input Upload File -->
             <div>

@@ -34,30 +34,34 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
   const userId = decodedToken.user_id; // Ambil user.id dari payload token
   console.log("User ID:", userId); // Debugging
 
-  // Ambil data dari form
-  const productName = document.getElementById('ProductName').value;
-  const price = document.getElementById('price').value;
-  const description = document.getElementById('description').value;
-  const categoryId = document.getElementById('category_id').value;
-  const image = document.getElementById('image').files[0]; // Ambil file yang diupload
+// Ambil data dari form
+const productName = document.getElementById('ProductName').value;
 
-  // Cek apakah file gambar ada
-  if (!image) {
-    alert('Please upload an image for the product.');
-    return;
-  }
+// Ambil harga dan hilangkan simbol 'Rp' dan titik (jika ada)
+let price = document.getElementById('price').value.replace(/[^\d]/g, ''); // Menghapus semua karakter non-digit
 
-  const statusId = "67910940c6747400bebfe2cd"
+const description = document.getElementById('description').value;
+const categoryId = document.getElementById('category_id').value;
+const image = document.getElementById('image').files[0]; // Ambil file yang diupload
 
-  // Buat FormData untuk mengirim data dengan file
-  const formData = new FormData();
-  formData.append('ProductName', productName);
-  formData.append('price', price);
-  formData.append('description', description);
-  formData.append('category.id', categoryId);
-  formData.append('status.id', statusId);
-  formData.append('image', image); // File gambar
-  formData.append('user.id', userId); // User ID dari token yang didekode
+// Cek apakah file gambar ada
+if (!image) {
+  alert('Please upload an image for the product.');
+  return;
+}
+
+const statusId = "67910940c6747400bebfe2cd"
+
+// Buat FormData untuk mengirim data dengan file
+const formData = new FormData();
+formData.append('ProductName', productName);
+formData.append('price', price); // Mengirim harga dalam format angka (tanpa simbol 'Rp' dan titik)
+formData.append('description', description);
+formData.append('category.id', categoryId);
+formData.append('status.id', statusId);
+formData.append('image', image); // File gambar
+formData.append('user.id', userId); // User ID dari token yang didekode
+
 
   try {
     // Kirim data ke API
