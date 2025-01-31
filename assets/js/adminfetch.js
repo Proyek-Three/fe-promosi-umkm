@@ -31,7 +31,6 @@ function addRowToTable(user) {
     <i class="fa-solid fa-trash mr-2"></i> Delete
   </button>
 </td>
-
   `;
 
   tableBody.appendChild(newRow);
@@ -42,8 +41,16 @@ async function loadUsersData() {
   try {
     const token = getToken();
     if (!token) {
-      alert("You are not authenticated. Please login first.");
-      window.location.href = "../../auth/login.html";
+      // Menggunakan SweetAlert2 untuk menampilkan pesan kesalahan
+      Swal.fire({
+        icon: 'error',
+        title: 'Authentication Required',
+        text: 'You are not authenticated. Please login first.',
+        confirmButtonText: 'OK',
+        willClose: () => {
+          window.location.href = "../../auth/login.html"; // Redirect ke halaman login setelah pop-up ditutup
+        }
+      });
       return;
     }
 
@@ -69,11 +76,23 @@ async function loadUsersData() {
     } else {
       const errorResponse = await response.json();
       console.error("Failed to load users:", errorResponse.message);
-      alert(`Failed to load users: ${errorResponse.message}`);
+      // Menampilkan SweetAlert2 pop-up untuk error saat mengambil data
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to Load Users',
+        text: `Failed to load users: ${errorResponse.message}`,
+        confirmButtonText: 'OK'
+      });
     }
   } catch (error) {
     console.error("Error loading users data:", error);
-    alert("An error occurred while loading users data.");
+    // Menampilkan SweetAlert2 pop-up untuk kesalahan saat memuat data pengguna
+    Swal.fire({
+      icon: 'error',
+      title: 'An Error Occurred',
+      text: 'An error occurred while loading users data.',
+      confirmButtonText: 'OK'
+    });
   }
 }
 

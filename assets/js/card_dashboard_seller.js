@@ -3,8 +3,16 @@ async function loadProductCount() {
   try {
     const token = getToken(); // Ambil token dari cookie
     if (!token) {
-      alert("You are not authenticated. Please login first.");
-      window.location.href = "../../auth/login.html"; // Redirect ke halaman login
+      // Gunakan SweetAlert2 untuk pemberitahuan login diperlukan
+      Swal.fire({
+        icon: 'error',
+        title: 'Authentication Required',
+        text: 'You are not authenticated. Please login first.',
+        confirmButtonText: 'OK',
+        willClose: () => {
+          window.location.href = "../../auth/login.html"; // Redirect ke halaman login setelah pop-up ditutup
+        }
+      });
       return;
     }
 
@@ -50,11 +58,23 @@ async function loadProductCount() {
     } else {
       const errorResponse = await response.json();
       console.error("Failed to load product count:", errorResponse.message);
-      alert(`Failed to load product count: ${errorResponse.message}`);
+      // Tampilkan error dengan SweetAlert2 jika gagal
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to Load Product Count',
+        text: `Error: ${errorResponse.message}`,
+        confirmButtonText: 'OK'
+      });
     }
   } catch (error) {
     console.error("Error loading product count:", error);
-    alert("An error occurred while loading product count.");
+    // Tampilkan error dengan SweetAlert2 jika terjadi masalah saat mengambil data
+    Swal.fire({
+      icon: 'error',
+      title: 'An Error Occurred',
+      text: 'An error occurred while loading product count.',
+      confirmButtonText: 'OK'
+    });
   }
 }
 

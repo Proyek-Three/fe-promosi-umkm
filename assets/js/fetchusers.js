@@ -1,3 +1,7 @@
+// Pastikan untuk menyertakan SweetAlert2 CDN di HTML
+// <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+// URL untuk mendapatkan dan memperbarui profil
 const isLocalhost = window.location.origin.includes("127.0.0.1");
 const PROFILE_URL = isLocalhost
   ? "http://127.0.0.1:8080/users/profile" // Endpoint untuk mendapatkan profil
@@ -20,8 +24,13 @@ async function loadProfileData() {
   try {
     const token = getToken();
     if (!token) {
-      alert("You are not authenticated. Please login first.");
-      window.location.href = "../../auth/login.html";
+      Swal.fire({
+        icon: 'error',
+        title: 'Authentication Required',
+        text: 'You are not authenticated. Please login first.',
+      }).then(() => {
+        window.location.href = "../../auth/login.html";
+      });
       return;
     }
 
@@ -47,15 +56,22 @@ async function loadProfileData() {
         userProfile.data.store?.store_name || "";
       document.getElementById("address").value =
         userProfile.data.store?.address || "";
-
     } else {
       const errorResponse = await response.json();
       console.error("Failed to load profile:", errorResponse.message);
-      alert(`Failed to load profile: ${errorResponse.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to load profile',
+        text: errorResponse.message,
+      });
     }
   } catch (error) {
     console.error("Error loading profile data:", error);
-    alert("An error occurred while loading profile data.");
+    Swal.fire({
+      icon: 'error',
+      title: 'An error occurred',
+      text: "An error occurred while loading profile data.",
+    });
   }
 }
 
@@ -65,8 +81,13 @@ async function editProfile(event) {
 
   const token = getToken();
   if (!token) {
-    alert("You are not authenticated. Please login first.");
-    window.location.href = "../../auth/login.html";
+    Swal.fire({
+      icon: 'error',
+      title: 'Authentication Required',
+      text: 'You are not authenticated. Please login first.',
+    }).then(() => {
+      window.location.href = "../../auth/login.html";
+    });
     return;
   }
 
@@ -90,21 +111,34 @@ async function editProfile(event) {
       },
       body: JSON.stringify(updatedData), // Kirim data sebagai JSON
     });
+
     if (response.ok) {
       const updatedProfile = await response.json();
       console.log("Profile updated successfully:", updatedProfile);
-      alert("Profile updated successfully!");
-      
-      // Refresh form dengan data terbaru
-      await loadProfileData(); // Memastikan data di-refresh
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile Updated',
+        text: 'Profile updated successfully!',
+      }).then(() => {
+        // Refresh form dengan data terbaru
+        loadProfileData(); // Memastikan data di-refresh
+      });
     } else {
       const errorResponse = await response.json();
       console.error("Failed to update profile:", errorResponse.message);
-      alert(`Failed to update profile: ${errorResponse.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to update profile',
+        text: errorResponse.message,
+      });
     }
   } catch (error) {
     console.error("Error updating profile data:", error);
-    alert("An error occurred while updating profile data.");
+    Swal.fire({
+      icon: 'error',
+      title: 'An error occurred',
+      text: "An error occurred while updating profile data.",
+    });
   }
 }
 

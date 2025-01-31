@@ -21,6 +21,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../../assets/css/users.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../assets/js/profile.js"></script>
   </head>
   <body class="bg-gray-100 font-family-karla flex">
@@ -263,57 +264,71 @@
 
       // Fungsi untuk memuat semua data produk dari server
       async function loadProductsData() {
-        try {
-          const token = getToken();
-          if (!token) {
-            alert("You are not authenticated. Please login first.");
-            window.location.href = "../../auth/login.html";
-            return;
-          }
+  try {
+    const token = getToken();
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "Not Authenticated",
+        text: "You are not authenticated. Please login first.",
+      }).then(() => {
+        window.location.href = "../../auth/login.html";
+      });
+      return;
+    }
 
-          const response = await fetch(
-            "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product-seller",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          if (response.ok) {
-            const result = await response.json(); // Ambil respons JSON
-            const products = result.data; // Akses properti 'data'
-
-            console.log("Products data loaded:", products);
-
-            const tableBody = document.getElementById("productsTableBody");
-            tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
-
-            // Tambahkan semua produk ke tabel
-            products.forEach((product) => addRowToTable(product));
-          } else {
-            const errorResponse = await response.json();
-            console.error("Failed to load products:", errorResponse.message);
-            alert(`Failed to load products: ${errorResponse.message}`);
-          }
-        } catch (error) {
-          console.error("Error loading products data:", error);
-          alert("An error occurred while loading products data.");
-        }
+    const response = await fetch(
+      "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product-seller",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
+    );
 
-      // Panggil loadProductsData() saat halaman dimuat
-      document.addEventListener("DOMContentLoaded", loadProductsData);
+    if (response.ok) {
+      const result = await response.json();
+      const products = result.data;
 
-      // Fungsi untuk mengambil token dari cookie
-      function getToken() {
-        return document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("token="))
-          ?.split("=")[1];
-      }
+      console.log("Products data loaded:", products);
+
+      const tableBody = document.getElementById("productsTableBody");
+      tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
+
+      // Tambahkan semua produk ke tabel
+      products.forEach((product) => addRowToTable(product));
+    } else {
+      const errorResponse = await response.json();
+      console.error("Failed to load products:", errorResponse.message);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Load Products",
+        text: errorResponse.message,
+      });
+    }
+  } catch (error) {
+    console.error("Error loading products data:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "An error occurred while loading products data.",
+    });
+  }
+}
+
+// Panggil loadProductsData() saat halaman dimuat
+document.addEventListener("DOMContentLoaded", loadProductsData);
+
+// Fungsi untuk mengambil token dari cookie
+function getToken() {
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
+}
+
     </script>
 
     <!-- Fetch -->
