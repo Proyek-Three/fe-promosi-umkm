@@ -241,62 +241,75 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden"
     >
       <div
-        class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 transform transition-transform duration-300 scale-95"
+        class="bg-white rounded-xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 xl:w-2/5 p-8 transform transition-transform duration-300 scale-95 hover:scale-100"
       >
         <!-- Modal Header -->
-        <div class="flex justify-between items-center border-b pb-3">
+        <div class="flex justify-between items-center border-b pb-4">
           <h2
             id="modalProductName"
-            class="text-2xl font-semibold text-gray-800"
+            class="text-3xl font-bold text-gray-900 flex items-center"
           >
-            Product Details
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i> Product
+            Details
           </h2>
           <button
             onclick="closeModal()"
-            class="text-gray-600 hover:text-gray-800 focus:outline-none"
+            class="text-gray-600 hover:text-red-600 focus:outline-none"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <i class="fas fa-times text-2xl"></i>
           </button>
         </div>
         <!-- Modal Content -->
-        <div class="mt-4">
-          <div class="flex items-start">
+        <div class="mt-6">
+          <div class="flex flex-col md:flex-row items-start">
             <!-- Product Image -->
-            <img
-              id="modalProductImage"
-              class="w-1/3 h-32 object-cover rounded-lg shadow-md"
-              src=""
-              alt="Product Image"
-            />
+            <div class="w-full md:w-1/2 flex justify-center">
+              <img
+                id="modalProductImage"
+                class="w-full md:w-80 h-60 object-cover rounded-lg shadow-md cursor-pointer"
+                src=""
+                alt="Product Image"
+                onclick="openImageModal(this)"
+              />
+            </div>
             <!-- Product Details -->
-            <div class="ml-4 w-2/3">
-              <p class="text-gray-600 text-lg font-semibold">
-                <strong>Store:</strong> <span id="modalStoreName"></span>
+            <div class="ml-0 md:ml-6 w-full md:w-1/2">
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center mt-2"
+              >
+                <i class="fas fa-store text-blue-500 mr-2"></i>
+                <strong class="mr-2">Store:</strong>
+                <span id="modalStoreName"></span>
               </p>
-              <p class="text-gray-600 text-lg font-semibold">
-                <strong>Price:</strong> <span id="modalPrice"></span>
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center mt-2"
+              >
+                <i class="fas fa-tag text-green-500 mr-2"></i>
+                <strong class="mr-2">Price:</strong>
+                <span id="modalPrice"></span>
               </p>
-              <p class="text-gray-600 text-sm mt-2">
-                <strong>Description:</strong>
+              <p class="text-gray-600 text-md mt-2 flex items-center">
+                <i class="fas fa-file-alt text-purple-500 mr-2"></i>
+                <strong class="mr-2">Description:</strong>
                 <span id="modalDescription"></span>
               </p>
-              <p class="text-gray-600 text-sm mt-2">
-                <strong>Address:</strong> <span id="modalAddress"></span>
+              <p class="text-gray-600 text-md mt-2 flex items-center">
+                <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
+                <strong class="mr-2">Address:</strong>
+                <span id="modalAddress"></span>
               </p>
-              <p><strong>Phone:</strong> <span id="modalPhoneNumber"></span></p>
+              <!-- Phone Number with WhatsApp Link -->
+              <p class="text-gray-600 text-md mt-2 flex items-center">
+                <i class="fa-brands fa-whatsapp mr-2"></i>
+                <strong class="mr-2">Phone Number:</strong>
+                <a
+                  id="modalPhoneNumber"
+                  href="https://wa.me/nomor_telepon"
+                  class="text-blue-500 hover:text-blue-600" target="_blank" >
+                  <span id="phoneNumberText">Nomor Telepon</span>
+                  <!-- Ganti dengan teks nomor telepon yang sesuai -->
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -304,14 +317,65 @@
         <div class="mt-6 flex justify-end">
           <button
             onclick="closeModal()"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none"
+            class="px-6 py-3 bg-red-500 text-white text-lg rounded-lg hover:bg-red-600 transition-all"
           >
-            Cancel
+            <i class="fas fa-times-circle"></i> Close
           </button>
         </div>
       </div>
     </div>
+
+    <!-- Modal for Full Image -->
+    <div
+      id="imageModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden"
+    >
+      <div class="bg-white p-4 rounded-lg shadow-lg w-11/12 md:w-1/2 xl:w-1/3">
+        <div class="flex justify-end">
+          <button
+            onclick="closeImageModal()"
+            class="text-gray-600 hover:text-red-600 focus:outline-none"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+        <img
+          id="fullImage"
+          class="w-full h-auto object-contain rounded-lg"
+          src=""
+          alt="Full Product Image"
+        />
+      </div>
+    </div>
+
+    <script>
+      // Open Image Modal
+      function openImageModal(imgElement) {
+        const imageModal = document.getElementById("imageModal");
+        const fullImage = document.getElementById("fullImage");
+        fullImage.src = imgElement.src; // Set the full image source
+        imageModal.classList.remove("hidden"); // Show the modal
+      }
+
+      // Close Image Modal
+      function closeImageModal() {
+        const imageModal = document.getElementById("imageModal");
+        imageModal.classList.add("hidden"); // Hide the modal
+      }
+
+      // Close Main Modal
+      function closeModal() {
+        const productModal = document.getElementById("productModal");
+        productModal.classList.add("hidden");
+      }
+    </script>
     <!-- MODAL END -->
+
+    <!-- FontAwesome CDN -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- CONTENT END -->
 

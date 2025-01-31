@@ -1,12 +1,14 @@
 fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
   .then((response) => response.json())
   .then((products) => {
-    return fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/productnumber")
+    return fetch(
+      "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/productnumber"
+    )
       .then((response) => response.json())
       .then((phoneNumbers) => {
         console.log("Fetched phone numbers:", phoneNumbers);
         const phoneMap = new Map();
-        phoneNumbers.forEach(phone => {
+        phoneNumbers.forEach((phone) => {
           phoneMap.set(phone._id, phone.phone_number);
         });
 
@@ -22,43 +24,75 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
           const productId = product.id;
           console.log("Looking for phone number with product ID:", productId);
 
-          const phoneNumber = productId ? phoneMap.get(productId) || "N/A" : "N/A";
+          const phoneNumber = productId
+            ? phoneMap.get(productId) || "N/A"
+            : "N/A";
           console.log("Assigned phone number:", phoneNumber);
 
           const productElement = `
-            <div
-              class="bg-white rounded-lg shadow-lg p-8 product-item"
-              data-category="${product.category ? product.category.category_name.toLowerCase() : 'Unknown'}" 
-              data-name="${product.product_name}"
-              data-store="${product.user && product.user.store ? product.user.store.store_name : 'Unknown'}"
-              data-phone="${phoneNumber}"
-              data-price="Rp. ${product.price ? product.price.toLocaleString() : '0'}"
-              data-description="${product.description}"
-              data-address="${product.user && product.user.store ? product.user.store.store_name : 'Unknown'}"
-            >
-              <img
-                class="object-cover w-full h-48 rounded-t-lg"
-                src="${product.image}"
-                alt="${product.product_name}"
-              />
-              <h3 class="text-xl font-bold text-gray-900 mt-4">
-                ${product.product_name}
+          <div
+            class="bg-white rounded-lg shadow-lg p-6 product-item hover:shadow-2xl transition-shadow duration-300"
+            data-category="${
+              product.category
+                ? product.category.category_name.toLowerCase()
+                : "Unknown"
+            }"
+            data-name="${product.product_name}"
+            data-store="${
+              product.user && product.user.store
+                ? product.user.store.store_name
+                : "Unknown"
+            }"
+            data-phone="${phoneNumber}"
+            data-price="Rp. ${
+              product.price ? product.price.toLocaleString() : "0"
+            }"
+            data-description="${product.description}"
+            data-address="${
+              product.user && product.user.store
+                ? product.user.store.store_name
+                : "Unknown"
+            }"
+          >
+            <!-- Product Image -->
+            <div class="relative">
+              <img class="object-cover w-full h-52 rounded-lg shadow-md" src="${
+                product.image
+              }" alt="${product.product_name}" />
+              <span class="absolute top-2 left-2 bg-blue-600 text-white px-3 py-1 text-xs font-bold rounded-md shadow-md">
+                ${
+                  product.category
+                    ? product.category.category_name
+                    : "No Category"
+                }
+              </span>
+            </div>
+        
+            <!-- Product Info -->
+            <div class="mt-4">
+              <h2 class="text-2xl font-bold text-gray-900 flex items-center">
+                <i class="fas fa-box mr-2 text-purple-600"></i> ${
+                  product.product_name
+                }
+              </h2>
+              <h3 class="text-gray-500 font-bold text-md mt-2 flex items-center">
+                <i class="fas fa-tag text-green-500 mr-2"></i> Rp. ${
+                  product.price ? product.price.toLocaleString() : "0"
+                }
               </h3>
-              <h4 class="text-gray-500 font-bold text-sm mt-2">
-                Rp. ${product.price ? product.price.toLocaleString() : '0'}
-              </h4>
-              <p class="text-gray-500 text-sm text-justify mt-2">
-                ${product.description}
-              </p>
+        
+              <!-- Button -->
               <button
                 type="button"
-                class="mt-4 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                class="mt-4 w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-6 py-3 text-center transition-transform transform hover:scale-105"
                 onclick="showModal(this)"
               >
-                Product Details
+                <i class="fas fa-info-circle"></i> Product Details
               </button>
             </div>
-          `;
+          </div>
+        `;
+
           productContainer.innerHTML += productElement;
         });
       });
