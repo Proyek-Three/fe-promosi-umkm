@@ -110,13 +110,20 @@ function showModal(button) {
   const modalPhoneButton = document.getElementById("modalPhoneButton");
 
   if (phoneNumber !== "N/A") {
-    const cleanPhoneNumber = phoneNumber.replace(/\D/g, ""); // Hanya angka
+    let cleanPhoneNumber = phoneNumber.replace(/\D/g, ""); // Hapus semua karakter selain angka
+  
+    // Jika nomor diawali dengan 0, ubah menjadi 62
+    if (cleanPhoneNumber.startsWith("0")) {
+      cleanPhoneNumber = "62" + cleanPhoneNumber.substring(1);
+    }
+  
     modalPhoneButton.href = `https://wa.me/${cleanPhoneNumber}`;
     modalPhoneButton.classList.remove("hidden"); // Tampilkan tombol jika ada nomor
   } else {
     modalPhoneButton.href = "#";
     modalPhoneButton.classList.add("hidden"); // Sembunyikan tombol jika nomor tidak tersedia
   }
+  
 
   const modal = document.getElementById("productModal");
   modal.classList.remove("hidden");
