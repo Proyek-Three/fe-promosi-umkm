@@ -47,6 +47,8 @@ async function loadProfileData() {
       console.log("Profile data loaded:", userProfile);
 
       // Isi form dengan data pengguna
+      document.getElementById("name").value =
+        userProfile.data.name || "";
       document.getElementById("username").value =
         userProfile.data.username || "";
       document.getElementById("phone_number").value =
@@ -93,6 +95,7 @@ async function editProfile(event) {
 
   // Ambil data dari form
   const updatedData = {
+    name: document.getElementById("name").value,
     username: document.getElementById("username").value,
     phone_number: document.getElementById("phone_number").value,
     email: document.getElementById("email").value,
