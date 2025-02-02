@@ -6,10 +6,7 @@ const isLocalhost = window.location.origin.includes("127.0.0.1");
 const PROFILE_URL = isLocalhost
   ? "http://127.0.0.1:8080/users/profile" // Endpoint untuk mendapatkan profil
   : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/profile";
-
-const UPDATE_PROFILE_URL = isLocalhost
-  ? "http://127.0.0.1:8080/update/users/profile" // Endpoint untuk update profil
-  : "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/users/profile";
+;
 
 // Fungsi untuk mendapatkan token autentikasi dari cookie
 function getToken() {
@@ -34,7 +31,7 @@ async function loadProfileData() {
       return;
     }
 
-    const response = await fetch(PROFILE_URL, {
+    const response = await fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/users/profile", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +103,7 @@ async function editProfile(event) {
   };
 
   try {
-    const response = await fetch(UPDATE_PROFILE_URL, {
+    const response = await fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/update/users/profile", {
       method: "PUT", // Gunakan metode PUT untuk update data
       headers: {
         "Content-Type": "application/json",

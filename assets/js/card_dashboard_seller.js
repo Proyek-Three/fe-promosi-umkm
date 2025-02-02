@@ -1,4 +1,23 @@
-// Fungsi untuk mendapatkan jumlah produk berdasarkan user ID
+// Fungsi untuk mendecode Base64 URL-safe menjadi string
+function base64UrlDecode(base64Url) {
+  // Gantilah karakter-karakter yang tidak sesuai dengan Base64 standar
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const decoded = atob(base64); // Decode Base64
+  return decoded;
+}
+
+// Fungsi untuk mendecode token JWT
+function decodeJWT(token) {
+  const parts = token.split('.'); // Pisahkan token menjadi tiga bagian
+  if (parts.length !== 3) {
+    throw new Error('Invalid token format');
+  }
+
+  // Decode bagian payload (bagian kedua)
+  const payload = base64UrlDecode(parts[1]);
+  return JSON.parse(payload); // Ubah menjadi objek JSON
+}
+
 async function loadProductCount() {
   try {
     const token = getToken(); // Ambil token dari cookie
@@ -11,6 +30,26 @@ async function loadProductCount() {
         confirmButtonText: 'OK',
         willClose: () => {
           window.location.href = "../../auth/login.html"; // Redirect ke halaman login setelah pop-up ditutup
+        }
+      });
+      return;
+    }
+
+    // Decode token dan ambil role
+    const decodedToken = decodeJWT(token);
+    const userRole = decodedToken.role;
+    console.log("User role:", userRole);
+    
+
+    // Jika role bukan seller, tampilkan pesan error dan batalkan eksekusi
+    if (userRole !== "seller") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Access Denied',
+        text: 'You do not have permission to access this page.',
+        confirmButtonText: 'OK',
+        willClose: () => {
+          window.location.href = "../../auth/login.html"; // Redirect ke halaman login jika role tidak sesuai
         }
       });
       return;
@@ -59,22 +98,22 @@ async function loadProductCount() {
       const errorResponse = await response.json();
       console.error("Failed to load product count:", errorResponse.message);
       // Tampilkan error dengan SweetAlert2 jika gagal
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed to Load Product Count',
-        text: `Error: ${errorResponse.message}`,
-        confirmButtonText: 'OK'
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Failed to Load Product Count',
+      //   text: `Error: ${errorResponse.message}`,
+      //   confirmButtonText: 'OK'
+      // });
     }
   } catch (error) {
     console.error("Error loading product count:", error);
     // Tampilkan error dengan SweetAlert2 jika terjadi masalah saat mengambil data
-    Swal.fire({
-      icon: 'error',
-      title: 'An Error Occurred',
-      text: 'An error occurred while loading product count.',
-      confirmButtonText: 'OK'
-    });
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'An Error Occurred',
+    //   text: 'An error occurred while loading product count.',
+    //   confirmButtonText: 'OK'
+    // });
   }
 }
 

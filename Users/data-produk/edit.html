@@ -470,6 +470,57 @@
           const categoryId = document.getElementById("category_name").value;
           const imageFile = document.getElementById("image").files[0];
 
+            // Validasi input wajib dan karakter aneh
+            if (!productName || !price || !description || !categoryId) {
+            Swal.fire({
+              icon: "warning",
+              title: "Validation Error",
+              text: "All fields must be filled!",
+            });
+            return;
+          }
+
+          // Validasi karakter aneh pada nama produk dan deskripsi
+          const nameRegex = /^[a-zA-Z0-9\s]+$/; // Hanya huruf, angka, dan spasi
+          if (!nameRegex.test(productName)) {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Product Name",
+              text: "Product name can only contain letters, numbers, and spaces.",
+            });
+            return;
+          }
+
+          const descriptionRegex = /^[a-zA-Z0-9\s,.\-!?()&]*$/; // Karakter yang umum di deskripsi
+          if (!descriptionRegex.test(description)) {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Description",
+              text: "Description can only contain letters, numbers, and a few special characters like , . - ! ? () &.",
+            });
+            return;
+          }
+
+          // Validasi harga harus berupa angka positif
+          if (isNaN(price) || parseInt(price) <= 0) {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Price",
+              text: "Price must be a valid positive number.",
+            });
+            return;
+          }
+
+          // Validasi kategori yang dipilih
+          if (categoryId === "") {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Category",
+              text: "Please select a valid category.",
+            });
+            return;
+          }
+
           const statusId = "67910940c6747400bebfe2cd";
 
           const formData = new FormData();
@@ -587,5 +638,6 @@
       integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
       crossorigin="anonymous"
     ></script>
+    <!-- <script src="../assets/js/redirect_validator.js"></script> -->
   </body>
 </html>
