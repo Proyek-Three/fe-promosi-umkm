@@ -31,44 +31,62 @@ fetch("https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product")
 
           const productElement = `
           <div
-            class="bg-white rounded-lg shadow-lg p-6 product-item hover:shadow-2xl transition-shadow duration-300"
-            data-category="${product.category
-              ? product.category.category_name.toLowerCase()
-              : "Unknown"
+            class="bg-white rounded-xl shadow-lg p-6 product-item hover:shadow-2xl transition-transform transform hover:scale-105 duration-300 border border-gray-200"
+            data-category="${
+              product.category
+                ? product.category.category_name.toLowerCase()
+                : "Unknown"
             }"
             data-name="${product.product_name}"
-            data-store="${product.user && product.user.store
-              ? product.user.store.store_name
-              : "Unknown"
-            }"
+            data-store="${product.user?.store?.store_name || "Unknown"}"
             data-phone="${phoneNumber}"
-            data-price="Rp. ${product.price ? product.price.toLocaleString() : "0"
+            data-price="Rp. ${
+              product.price ? product.price.toLocaleString() : "0"
             }"
             data-description="${product.description}"
-            data-address="${product.user?.store?.address || product.user?.store?.store_address || 'Unknown address'}"
+            data-address="${
+              product.user?.store?.address ||
+              product.user?.store?.store_address ||
+              "Unknown address"
+            }"
           >
             <!-- Product Image -->
             <div class="relative">
-              <img class="object-cover w-full h-52 rounded-lg shadow-md" src="${product.image
-            }" alt="${product.product_name}" />
-              <span class="absolute top-2 left-2 bg-blue-600 text-white px-3 py-1 text-xs font-bold rounded-md shadow-md">
-                ${product.category
-              ? product.category.category_name
-              : "No Category"
-            }
+              <img class="object-cover w-full h-52 rounded-xl shadow-md" src="${
+                product.image
+              }" alt="${product.product_name}" />
+              <span class="absolute top-2 left-2 bg-gradient-to-r from-blue-600 to-purple-500 text-white px-4 py-1 text-xs font-bold rounded-lg shadow-md">
+                ${
+                  product.category
+                    ? product.category.category_name
+                    : "No Category"
+                }
               </span>
             </div>
         
             <!-- Product Info -->
             <div class="mt-4">
               <h2 class="text-2xl font-bold text-gray-900 flex items-center">
-                <i class="fas fa-box mr-2 text-purple-600"></i> ${product.product_name
-            }
+                <i class="fas fa-box mr-2 text-purple-600"></i> ${
+                  product.product_name
+                }
               </h2>
-              <h3 class="text-gray-500 font-bold text-md mt-2 flex items-center">
-                <i class="fas fa-tag text-green-500 mr-2"></i> Rp. ${product.price ? product.price.toLocaleString() : "0"
-            }
+        
+              <h3 class="text-gray-600 font-bold text-md mt-2 flex items-center">
+                <i class="fas fa-tag text-green-500 mr-2"></i> Rp. ${
+                  product.price ? product.price.toLocaleString() : "0"
+                }
               </h3>
+              
+              <!-- Product Description -->
+              <p class="text-gray-700 mt-3 text-sm flex items-center">
+                <i class="fas fa-info-circle text-blue-500 mr-2"></i> 
+                ${
+                  product.description
+                    ? product.description
+                    : "No description available."
+                }
+              </p>
         
               <!-- Button -->
               <button
@@ -104,26 +122,26 @@ function showModal(button) {
   document.getElementById("modalStoreName").textContent = storeName;
   document.getElementById("modalPrice").textContent = price;
   document.getElementById("modalDescription").textContent = description;
-  document.getElementById("modalAddress").textContent = address || "Alamat tidak tersedia";
+  document.getElementById("modalAddress").textContent =
+    address || "Alamat tidak tersedia";
 
   // Menangani tombol WhatsApp
   const modalPhoneButton = document.getElementById("modalPhoneButton");
 
   if (phoneNumber !== "N/A") {
     let cleanPhoneNumber = phoneNumber.replace(/\D/g, ""); // Hapus semua karakter selain angka
-  
+
     // Jika nomor diawali dengan 0, ubah menjadi 62
     if (cleanPhoneNumber.startsWith("0")) {
       cleanPhoneNumber = "62" + cleanPhoneNumber.substring(1);
     }
-  
+
     modalPhoneButton.href = `https://wa.me/${cleanPhoneNumber}`;
     modalPhoneButton.classList.remove("hidden"); // Tampilkan tombol jika ada nomor
   } else {
     modalPhoneButton.href = "#";
     modalPhoneButton.classList.add("hidden"); // Sembunyikan tombol jika nomor tidak tersedia
   }
-  
 
   const modal = document.getElementById("productModal");
   modal.classList.remove("hidden");
@@ -131,6 +149,5 @@ function showModal(button) {
   modal.classList.remove("scale-95");
   modal.classList.add("scale-100");
 }
-
 
 console.log("Store Info:", product.user?.store);
