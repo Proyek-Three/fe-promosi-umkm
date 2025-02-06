@@ -49,7 +49,7 @@ async function loadProductCount() {
         text: 'You do not have permission to access this page.',
         confirmButtonText: 'OK',
         willClose: () => {
-          window.location.href = "../../auth/login.html"; // Redirect ke halaman login jika role tidak sesuai
+          window.location.href = "../auth/login.html"; // Redirect ke halaman login jika role tidak sesuai
         }
       });
       return;
