@@ -45,6 +45,7 @@ async function loadData() {
         confirmButtonText: 'OK',
         willClose: () => {
           window.location.href = "../../auth/login.html"; // Redirect ke halaman login setelah pop-up ditutup
+          // window.location.href = "./../Admin/data-produk/index.html"; // Redirect ke halaman login setelah pop-up ditutup
         }
       });
     }

@@ -389,6 +389,9 @@
                     </tr>
                   </thead>
                   <!-- ISI  -->
+                  <tbody
+                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800"
+                  ></tbody>
                 </table>
               </div>
             </div>
@@ -430,12 +433,108 @@
             // Panggil fungsi untuk fetch data
             fetchStatuses();
           });
+
+          document.addEventListener("DOMContentLoaded", async function () {
+            const apiUrl =
+              "https://bp-promosi-umkm-0fd00e17451e.herokuapp.com/product";
+            const tableBody = document.querySelector("#iniTabel tbody");
+            const statusFilter = document.getElementById("statusFilter");
+
+            async function fetchProducts() {
+              try {
+                const response = await fetch(apiUrl);
+                if (!response.ok)
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const products = await response.json();
+                displayProducts(products);
+              } catch (error) {
+                console.error("Gagal mengambil data produk:", error);
+              }
+            }
+
+            function displayProducts(products) {
+              tableBody.innerHTML = ""; // Kosongkan tabel sebelum menampilkan data baru
+
+              products.forEach((product) => {
+                const row = document.createElement("tr");
+                row.classList.add(
+                  "text-gray-700",
+                  "dark:text-gray-400",
+                  "hover:bg-gray-100",
+                  "dark:hover:bg-gray-700",
+                  "transition-colors",
+                  "duration-200"
+                );
+
+                row.innerHTML = `
+        <td class="px-4 py-3">
+          <img src="${product.image}" alt="${
+                  product.product_name
+                }" class="w-16 h-16 object-cover rounded-lg shadow-md">
+        </td>
+        <td class="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-900">
+          ${product.user.store.store_name}
+        </td>
+        <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
+          ${product.product_name}
+        </td>
+        <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
+          ${product.category.category_name}
+        </td>
+        <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900 truncate max-w-xs">
+          ${product.description}
+        </td>
+        <td class="px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
+          Rp ${product.price.toLocaleString()}
+        </td>
+        <td class="px-4 py-3">
+          <span class="px-3 py-1 text-sm font-bold text-gray-900 dark:text-gray-900">
+            ${product.status.status}
+          </span>
+        </td>
+        <td class="px-4 py-3 text-center">
+          <div class="flex items-center justify-center space-x-3">
+            <a href="edit.html?productId=${
+              product.id
+            }" class="px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+              <i class="fa-solid fa-pen-to-square mr-2"></i>Edit Status
+            </a>
+            <button onclick="confirmDelete('${
+              product.id
+            }')" class="px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+              <i class="fa-solid fa-trash mr-2"></i>Delete
+            </button>
+          </div>
+        </td>
+      `;
+                tableBody.appendChild(row);
+              });
+            }
+
+            statusFilter.addEventListener("change", async function () {
+              const selectedStatus = statusFilter.value;
+              const response = await fetch(apiUrl);
+              const products = await response.json();
+
+              const filteredProducts =
+                selectedStatus === "all"
+                  ? products
+                  : products.filter(
+                      (product) => product.status.id === selectedStatus
+                    );
+
+              displayProducts(filteredProducts);
+            });
+
+            fetchProducts();
+          });
         </script>
       </div>
     </div>
   </body>
   <!-- Fetch -->
-  <script type="module" src="../../assets/js/fetch_product.js"></script>
+  <!-- <script type="module" src="../../assets/js/fetch_product.js"></script> -->
   <!-- Tambahkan ini sebelum tag </body> -->
   <script src="../../assets/js/controller/delete_product.js"></script>
   <!-- <script src="../assets/js/redirect_validator.js"></script> -->
